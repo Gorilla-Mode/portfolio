@@ -66,8 +66,13 @@ h3 {
 
 a {
 	color: var(--color-text);
+	text-decoration: none;
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.3em;
+}
+
+a:hover {
+	text-decoration: underline dotted;
 }
 
 button,

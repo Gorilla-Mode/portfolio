@@ -78,7 +78,6 @@
 	.back-link:hover,
 	.back-link:focus-visible {
 		color: var(--color-text);
-		text-decoration: underline;
 	}
 
 	.project-heading {
@@ -192,11 +191,6 @@
 
 	.detail-group a {
 		text-decoration: none;
-	}
-
-	.detail-group a:hover,
-	.detail-group a:focus-visible {
-		text-decoration: underline;
 	}
 
 	.link-placeholder {

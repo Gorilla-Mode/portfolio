@@ -67,7 +67,6 @@
 	nav a:hover,
 	nav a:focus-visible {
 		color: var(--color-text);
-		text-decoration: underline;
 	}
 
 	@media (max-width: 30rem) {

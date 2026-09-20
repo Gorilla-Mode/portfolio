@@ -15,7 +15,7 @@ Large typography, generous spacing, thin borders, and square shapes give the wor
 - **Layout:** A centered column up to 960px wide. Compact header, spacious introduction, two-column
   project grid, and a small footer. Project detail pages use the same column, with a large image area
   and a text-and-metadata layout. At 640px and below, projects and detail content stack into one column.
-- **Interaction:** Native section links, underlined hover states, visible keyboard focus, and a
+- **Interaction:** Native section links, dotted underlines on hovered links by default, visible keyboard focus, and a
   skip link. The entire project card links to its detail page. Smooth scrolling only when reduced
   motion is not requested. No decorative animations.
 - **Content:** Edit the name, role, biography, and typed project list in `src/lib/content.ts`.

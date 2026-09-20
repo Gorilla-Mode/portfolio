@@ -43,8 +43,7 @@
 		text-decoration: none;
 	}
 
-	.card-link:hover h3,
-	.card-link:focus-visible h3 {
+	.card-link:hover h3 {
 		border-color: var(--color-text);
 	}
 
@@ -57,7 +56,7 @@
 		align-items: baseline;
 		justify-content: space-between;
 		gap: var(--space-4);
-		border-bottom: 1px solid transparent;
+		border-bottom: 1px dotted transparent;
 		font-size: 1.5rem;
 		line-height: 1.25;
 		letter-spacing: -0.035em;

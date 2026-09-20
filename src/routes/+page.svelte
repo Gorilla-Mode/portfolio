@@ -51,6 +51,5 @@
 	footer a:hover,
 	footer a:focus-visible {
 		color: var(--color-text);
-		text-decoration: underline;
 	}
 </style>
