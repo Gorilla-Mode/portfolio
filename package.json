@@ -34,5 +34,12 @@
 		"typescript-eslint": "^8.60.1",
 		"vite": "^8.0.16",
 		"wrangler": "^4.135.0"
+	},
+		"npm": {
+			"allow-scripts": {
+				"esbuild": true,
+				"workerd": true
+			}
 	}
 }
+
