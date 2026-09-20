@@ -14,7 +14,8 @@ Large typography, generous spacing, thin borders, and square shapes give the wor
   numbers and technology labels. Large, tightly spaced headings contrast with relaxed body text.
 - **Layout:** A centered column up to 960px wide. Compact header, spacious introduction, two-column
   project grid, and a small footer. Project detail pages use the same column, with a large image area
-  and a text-and-metadata layout. At 640px and below, projects and detail content stack into one column.
+  and a text-and-metadata layout. Detail pages start with an “All projects” back link instead of the
+  site header. At 640px and below, projects and detail content stack into one column.
 - **Interaction:** Native section links, dotted underlines on hovered links by default, visible keyboard focus, and a
   skip link. The entire project card links to its detail page. Smooth scrolling only when reduced
   motion is not requested. No decorative animations.

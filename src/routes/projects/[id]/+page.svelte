@@ -1,6 +1,5 @@
 <script lang="ts">
 	import ProjectDetail from '$lib/components/ProjectDetail.svelte';
-	import SiteHeader from '$lib/components/SiteHeader.svelte';
 	import { profile } from '$lib/content';
 	import type { PageData } from './$types';
 
@@ -13,7 +12,6 @@
 </svelte:head>
 
 <a class="skip-link" href="#main-content">Skip to content</a>
-<SiteHeader name={profile.name} />
 
 <main id="main-content" class="container" tabindex="-1">
 	<ProjectDetail project={data.project} />

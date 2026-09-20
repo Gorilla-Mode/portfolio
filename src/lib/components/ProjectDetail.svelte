@@ -11,7 +11,6 @@
 	</a>
 
 	<header class="project-heading">
-		<p class="eyebrow">Selected work / Project details</p>
 		<h1 id="project-title">{project.title}<span>.</span></h1>
 		<p class="summary">{project.description}</p>
 	</header>
@@ -26,7 +25,6 @@
 
 	<div class="project-body">
 		<section aria-labelledby="about-project-heading">
-			<p class="eyebrow">The story</p>
 			<h2 id="about-project-heading">About the project</h2>
 			{#each project.longDescription as paragraph, index (index)}
 				<p class="detail-paragraph">{paragraph}</p>
@@ -82,11 +80,10 @@
 
 	.project-heading {
 		max-width: 48rem;
-		padding-block: var(--space-8) var(--space-7);
+		padding-block: var(--space-5) var(--space-7);
 	}
 
 	h1 {
-		margin-top: var(--space-4);
 		font-size: clamp(3rem, 8vw, 5.5rem);
 		line-height: 1.05;
 		letter-spacing: -0.07em;
@@ -145,7 +142,6 @@
 	}
 
 	.project-body section h2 {
-		margin-block: var(--space-4) var(--space-6);
 		font-size: clamp(1.75rem, 3vw, 2.25rem);
 		line-height: 1.2;
 		letter-spacing: -0.04em;
@@ -198,10 +194,6 @@
 	}
 
 	@media (max-width: 40rem) {
-		.project-heading {
-			padding-block: var(--space-7);
-		}
-
 		.project-body {
 			grid-template-columns: minmax(0, 1fr);
 			gap: var(--space-7);
