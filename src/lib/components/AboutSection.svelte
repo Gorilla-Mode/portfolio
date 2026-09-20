@@ -55,9 +55,7 @@
 		min-height: 2.75rem;
 		margin-top: var(--space-6);
 		font-size: 0.8125rem;
-	}
+		text-decoration: none;
 
-	.projects-link span {
-		font-size: 1.125rem;
 	}
 </style>

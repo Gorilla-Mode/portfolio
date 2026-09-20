@@ -1,37 +1,48 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import type { Project } from '$lib/content';
 
 	let { project, number }: { project: Project; number: number } = $props();
 </script>
 
 <article aria-labelledby={`${project.id}-title`}>
-	<p class="eyebrow project-number">{String(number).padStart(2, '0')}</p>
-	<h3 id={`${project.id}-title`}>
-		{#if project.href}
-			<a href={project.href} rel="external">{project.title}<span aria-hidden="true"> ↗</span></a>
-		{:else}
-			{project.title}
-		{/if}
-	</h3>
-	<p class="description">{project.description}</p>
-	<ul aria-label="Technologies">
-		{#each project.technologies as technology (technology)}
-			<li>{technology}</li>
-		{/each}
-	</ul>
+	<a
+		class="card-link"
+		href={resolve('/projects/[id]', { id: project.id })}
+		aria-labelledby={`${project.id}-title`}
+	>
+		<p class="eyebrow project-number">{String(number).padStart(2, '0')}</p>
+		<h3 id={`${project.id}-title`}>{project.title}<span aria-hidden="true"> ↗</span></h3>
+		<p class="description">{project.description}</p>
+		<ul aria-label="Technologies">
+			{#each project.technologies as technology (technology)}
+				<li>{technology}</li>
+			{/each}
+		</ul>
+	</a>
 </article>
 
 <style>
 	article {
-		display: flex;
-		flex-direction: column;
 		height: 100%;
 		min-width: 0;
-		padding: clamp(1.5rem, 3vw, 2rem);
 		border: 1px solid var(--color-border);
 		background: var(--color-surface);
 		box-shadow: var(--shadow-offset);
 		overflow-wrap: anywhere;
+	}
+
+	.card-link {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		padding: clamp(1.5rem, 3vw, 2rem);
+		text-decoration: none;
+	}
+
+	.card-link:hover h3,
+	.card-link:focus-visible h3 {
+		text-decoration: underline;
 	}
 
 	.project-number {
@@ -44,16 +55,7 @@
 		letter-spacing: -0.035em;
 	}
 
-	h3 a {
-		text-decoration: none;
-	}
-
-	h3 a:hover,
-	h3 a:focus-visible {
-		text-decoration: underline;
-	}
-
-	h3 a span {
+	h3 span {
 		font-size: 1rem;
 		color: var(--color-text-muted);
 	}

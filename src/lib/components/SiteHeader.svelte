@@ -1,16 +1,18 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+
 	let { name }: { name: string } = $props();
 </script>
 
 <header class="container">
-	<a class="identity" href="#about" aria-label={`${name} — about`}>
+	<a class="identity" href={resolve('/#about')} aria-label={`${name} — about`}>
 		<span class="mark" aria-hidden="true"></span>
 		<span>{name}<span class="name-period">.</span></span>
 	</a>
 
 	<nav aria-label="Main navigation">
-		<a href="#about"><span class="eyebrow" aria-hidden="true">01</span> About</a>
-		<a href="#projects"><span class="eyebrow" aria-hidden="true">02</span> Projects</a>
+		<a href={resolve('/#about')}><span class="eyebrow" aria-hidden="true">01</span> About</a>
+		<a href={resolve('/#projects')}><span class="eyebrow" aria-hidden="true">02</span> Projects</a>
 	</nav>
 </header>
 
