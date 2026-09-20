@@ -12,7 +12,10 @@
 		aria-labelledby={`${project.id}-title`}
 	>
 		<p class="eyebrow project-number">{String(number).padStart(2, '0')}</p>
-		<h3 id={`${project.id}-title`}>{project.title}<span aria-hidden="true"> ↗</span></h3>
+		<h3 id={`${project.id}-title`}>
+			<span class="project-title">{project.title}</span>
+			<span class="project-arrow" aria-hidden="true">↗</span>
+		</h3>
 		<p class="description">{project.description}</p>
 		<ul aria-label="Technologies">
 			{#each project.technologies as technology (technology)}
@@ -42,7 +45,7 @@
 
 	.card-link:hover h3,
 	.card-link:focus-visible h3 {
-		text-decoration: underline;
+		border-color: var(--color-text);
 	}
 
 	.project-number {
@@ -50,12 +53,22 @@
 	}
 
 	h3 {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-4);
+		border-bottom: 1px solid transparent;
 		font-size: 1.5rem;
 		line-height: 1.25;
 		letter-spacing: -0.035em;
 	}
 
-	h3 span {
+	.project-title {
+		min-width: 0;
+	}
+
+	.project-arrow {
+		flex: none;
 		font-size: 1rem;
 		color: var(--color-text-muted);
 	}
