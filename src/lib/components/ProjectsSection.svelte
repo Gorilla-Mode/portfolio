@@ -8,10 +8,8 @@
 <section id="projects" aria-labelledby="projects-heading">
 	<div class="section-heading">
 		<div>
-			<p class="eyebrow">02 / Projects</p>
 			<h2 id="projects-heading">Selected work<span>.</span></h2>
 		</div>
-		<p class="section-note">Placeholder projects. Your work goes here.</p>
 	</div>
 
 	<ul class="project-grid" aria-label="Selected projects">

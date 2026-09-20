@@ -11,7 +11,6 @@
 		href={resolve('/projects/[id]', { id: project.id })}
 		aria-labelledby={`${project.id}-title`}
 	>
-		<p class="eyebrow project-number">{String(number).padStart(2, '0')}</p>
 		<h3 id={`${project.id}-title`}>
 			<span class="project-title">{project.title}</span>
 			<span class="project-arrow" aria-hidden="true">↗</span>

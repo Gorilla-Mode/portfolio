@@ -3,7 +3,6 @@
 </script>
 
 <section id="about" aria-labelledby="about-heading">
-	<p class="eyebrow">01 / About</p>
 	<h1 id="about-heading">{name}<span>.</span></h1>
 	<p class="role">{role}</p>
 	<p class="bio">{bio}</p>
@@ -56,5 +55,12 @@
 		margin-top: var(--space-6);
 		font-size: 0.8125rem;
 		text-decoration: none;
+	}
+	a {
+		color: var(--color-text-muted);
+	}
+
+	a:hover{
+		color: var(--color-text);
 	}
 </style>

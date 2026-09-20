@@ -11,8 +11,8 @@
 	</a>
 
 	<nav aria-label="Main navigation">
-		<a href={resolve('/#about')}><span class="eyebrow" aria-hidden="true">01</span> About</a>
-		<a href={resolve('/#projects')}><span class="eyebrow" aria-hidden="true">02</span> Projects</a>
+		<a href={resolve('/#about')}>About</a>
+		<a href={resolve('/#projects')}>Projects</a>
 	</nav>
 </header>
 
