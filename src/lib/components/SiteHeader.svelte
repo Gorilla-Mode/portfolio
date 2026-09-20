@@ -7,7 +7,7 @@
 <header class="container">
 	<a class="identity" href={resolve('/#about')} aria-label={`${name} — about`}>
 		<span class="mark" aria-hidden="true"></span>
-		<span>{name}<span class="name-period">.</span></span>
+		<span>{name}</span>
 	</a>
 
 	<nav aria-label="Main navigation">
@@ -43,10 +43,6 @@
 		height: 1.125rem;
 		background: var(--color-text);
 		box-shadow: var(--shadow-offset);
-	}
-
-	.name-period {
-		color: var(--color-text-muted);
 	}
 
 	nav {

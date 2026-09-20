@@ -11,7 +11,7 @@
 	</a>
 
 	<header class="project-heading">
-		<h1 id="project-title">{project.title}<span>.</span></h1>
+		<h1 id="project-title">{project.title}</h1>
 		<p class="summary">{project.description}</p>
 	</header>
 
@@ -158,6 +158,7 @@
 
 	.detail-group h2 {
 		margin-bottom: var(--space-4);
+		font-family: var(--font-sans);
 	}
 
 	.technologies {
@@ -173,6 +174,7 @@
 		padding: var(--space-1) var(--space-2);
 		border: 1px solid var(--color-border);
 		font-family: var(--font-mono);
+		font-weight: 600;
 		font-size: 0.625rem;
 		line-height: 1.5;
 		color: var(--color-text-muted);

@@ -8,7 +8,7 @@
 <section id="projects" aria-labelledby="projects-heading">
 	<div class="section-heading">
 		<div>
-			<h2 id="projects-heading">Selected work<span>.</span></h2>
+			<h2 id="projects-heading">Selected work</h2>
 		</div>
 	</div>
 

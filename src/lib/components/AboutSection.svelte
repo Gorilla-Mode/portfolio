@@ -3,7 +3,7 @@
 </script>
 
 <section id="about" aria-labelledby="about-heading">
-	<h1 id="about-heading">{name}<span>.</span></h1>
+	<h1 id="about-heading">{name}</h1>
 	<p class="role">{role}</p>
 	<p class="bio">{bio}</p>
 	<a class="projects-link" href="#projects">
