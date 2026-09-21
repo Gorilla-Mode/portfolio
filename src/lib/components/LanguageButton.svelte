@@ -25,7 +25,5 @@
 	button:hover,
 	button:focus-visible {
 		color: var(--color-text);
-		text-decoration: underline dotted;
-		text-underline-offset: 0.3em;
 	}
 </style>
