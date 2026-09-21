@@ -18,7 +18,7 @@
 
 	<header class="project-heading">
 		<h1 id="project-title">{project.title}</h1>
-		<p class="summary">{project.description}</p>
+		<p class="summary drop-cap">{project.description}</p>
 	</header>
 
 	<figure class="project-image">
@@ -33,7 +33,7 @@
 		<section aria-labelledby="about-project-heading">
 			<h2 id="about-project-heading">{copy.aboutProject}</h2>
 			{#if project.longDescription[0]}
-				<p class="detail-paragraph first-description">{project.longDescription[0]}</p>
+				<p class="detail-paragraph first-description drop-cap">{project.longDescription[0]}</p>
 			{/if}
 			{#if project.longDescription.length > 1}
 				<div class="remaining-description">

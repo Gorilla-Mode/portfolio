@@ -10,8 +10,13 @@ Large typography, generous spacing, thin borders, and square shapes give the wor
 - **Shape:** All corners are square. Project cards and the header mark have a solid backing shape
   offset equally **6px down and 6px right**, using `--color-accent`. Use `--shadow-offset` with no
   blur or spread; leave room around the shape so it is never clipped.
-- **Typography:** System sans-serif for headings and body copy; system monospace for section
-  numbers and technology labels. Large, tightly spaced headings contrast with relaxed body text.
+- **Typography:** Jacquard 24 for headings, Jersey 20 for body copy, and Atkinson Hyperlegible Mono
+  for section numbers and technology labels, each with a system font fallback. Large, tightly spaced
+  headings contrast with relaxed body text. All text uses pretty wrapping and automatic hyphenation
+  according to the active language when the browser has a dictionary. The homepage biography, project
+  detail summary, and first long-description paragraph start with a bright, two-line drop cap in the
+  heading font. Role text, headings, project cards, metadata, and later description paragraphs do not
+  use drop caps.
 - **Layout:** A centered column up to 960px wide. Compact header, spacious introduction, two-column
   project grid, and a small footer. Project detail pages use the same column, with a large image area
   and a text-and-metadata layout. Detail pages start with an “All projects” back link instead of the
