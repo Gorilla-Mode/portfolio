@@ -117,8 +117,8 @@
 		cursor: pointer;
 	}
 
-	.selected :global(.outline path) {
-		stroke: var(--color-bright);
+	.selected :global(.portrait-image) {
+		--portrait-outline-color: var(--color-bright);
 	}
 
 	.caption {

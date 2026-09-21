@@ -15,41 +15,10 @@
 		width?: string;
 		height?: string;
 	} = $props();
-
-	const componentId = $props.id();
-	const clipId = `${componentId}-portrait-clip`;
-	let frameWidth = $state(0);
-	let frameHeight = $state(0);
-	let frameRatio = $derived(frameWidth > 0 && frameHeight > 0 ? frameWidth / frameHeight : 2 / 3);
-	let portraitPath = $derived.by(() => {
-		if (shape === 'pointed') {
-			const depth = Math.min(frameRatio * 0.75, 1);
-
-			return `M .5 0 C .18 ${depth * 0.24} 0 ${depth * 0.6} 0 ${depth} V 1 H 1 V ${depth} C 1 ${depth * 0.6} .82 ${depth * 0.24} .5 0 Z`;
-		}
-
-		const depth = Math.min(frameRatio * 0.5, 1);
-
-		return `M .5 0 A .5 ${depth} 0 0 1 1 ${depth} V 1 H 0 V ${depth} A .5 ${depth} 0 0 1 .5 0 Z`;
-	});
 </script>
 
-<figure
-	class="portrait-image"
-	style:width
-	style:height
-	bind:clientWidth={frameWidth}
-	bind:clientHeight={frameHeight}
->
-	<svg class="clip-definition" aria-hidden="true" width="0" height="0">
-		<defs>
-			<clipPath id={clipId} clipPathUnits="objectBoundingBox">
-				<path d={portraitPath} />
-			</clipPath>
-		</defs>
-	</svg>
-
-	<div class="media" style:clip-path={`url(#${clipId})`}>
+<figure class:pointed={shape === 'pointed'} class="portrait-image" style:width style:height>
+	<div class="media">
 		{#if image}
 			<img src={image.src} alt={image.alt} />
 		{:else}
@@ -57,22 +26,37 @@
 		{/if}
 	</div>
 
-	<svg class="outline" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
-		<path d={portraitPath} />
-	</svg>
+	<div class="outline" aria-hidden="true">
+		{#if shape === 'pointed'}
+			<svg class="arch-outline" viewBox="0 0 100 75" preserveAspectRatio="none">
+				<path d="M 0 75 C 0 45 18 18 50 0 C 82 18 100 45 100 75" />
+			</svg>
+		{:else}
+			<svg class="arch-outline" viewBox="0 0 100 50" preserveAspectRatio="none">
+				<path d="M 0 50 A 50 50 0 0 1 100 50" />
+			</svg>
+		{/if}
+		<span class="side-outline"></span>
+		<span class="bottom-outline"></span>
+	</div>
 </figure>
 
 <style>
 	.portrait-image {
+		--arch-depth: min(50cqi, 100%);
+		--arch-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M50 0A50 50 0 0 1 100 50H0A50 50 0 0 1 50 0Z'/%3E%3C/svg%3E");
+
 		position: relative;
+		container-type: inline-size;
 		width: 100%;
 		aspect-ratio: 2 / 3;
 		margin: 0;
 		filter: drop-shadow(var(--offset) var(--offset) 0 var(--color-accent));
 	}
 
-	.clip-definition {
-		position: absolute;
+	.portrait-image.pointed {
+		--arch-depth: min(75cqi, 100%);
+		--arch-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 75' preserveAspectRatio='none'%3E%3Cpath d='M50 0C18 18 0 45 0 75H100C100 45 82 18 50 0Z'/%3E%3C/svg%3E");
 	}
 
 	.media,
@@ -84,7 +68,25 @@
 	}
 
 	.media {
+		position: absolute;
+		inset: 0;
 		background: var(--color-surface);
+		-webkit-mask-image: var(--arch-mask), linear-gradient(#000 0 0);
+		mask-image: var(--arch-mask), linear-gradient(#000 0 0);
+		-webkit-mask-position:
+			center top,
+			center bottom;
+		mask-position:
+			center top,
+			center bottom;
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		-webkit-mask-size:
+			100% var(--arch-depth),
+			100% calc(100% - var(--arch-depth) + 1px);
+		mask-size:
+			100% var(--arch-depth),
+			100% calc(100% - var(--arch-depth) + 1px);
 	}
 
 	.media img {
@@ -106,14 +108,38 @@
 	.outline {
 		position: absolute;
 		inset: 0;
+		color: var(--portrait-outline-color, var(--color-border));
 		pointer-events: none;
+	}
+
+	.arch-outline {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: var(--arch-depth);
 		overflow: visible;
 	}
 
-	.outline path {
+	.arch-outline path {
 		fill: none;
-		stroke: var(--color-border);
+		stroke: currentColor;
 		stroke-width: 1;
 		vector-effect: non-scaling-stroke;
+	}
+
+	.side-outline {
+		position: absolute;
+		inset: var(--arch-depth) 0 0;
+		border-right: 1px solid currentColor;
+		border-left: 1px solid currentColor;
+	}
+
+	.bottom-outline {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		border-bottom: 1px solid currentColor;
 	}
 </style>

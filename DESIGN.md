@@ -19,6 +19,8 @@ Large typography, compact and consistent spacing, thin borders, and square shape
   continue to cover and crop within the configured frame rather than distort. The Gothic top keeps
   its proportions relative to the portrait width, so changing the height only changes the straight
   body below it. If the frame is shorter than the arch, the arch depth is capped to the frame height.
+  Portrait geometry is CSS-driven and server-stable, so its shape is final on the initial paint and
+  does not change during hydration.
 
 Example with exact dimensions:
 
