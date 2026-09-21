@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ImageDithering } from '@devmischief/shaders-svelte';
 	import { onMount } from 'svelte';
 	import type { PortraitFraming } from '$lib/content';
 
@@ -11,6 +12,7 @@
 		left: number;
 		top: number;
 	};
+	type DitherPalette = { back: string; front: string };
 
 	function numberOr(value: number | undefined, fallback: number): number {
 		return typeof value === 'number' && Number.isFinite(value) ? value : fallback;
@@ -28,12 +30,14 @@
 		image,
 		placeholder,
 		shape = 'rounded',
+		dithered = false,
 		width,
 		height
 	}: {
 		image?: Portrait;
 		placeholder: string;
 		shape?: Shape;
+		dithered?: boolean;
 		width?: string;
 		height?: string;
 	} = $props();
@@ -45,8 +49,11 @@
 	let intrinsicWidth = $state(0);
 	let intrinsicHeight = $state(0);
 	let measuredSource = $state<string>();
+	let ditherPalette = $state<DitherPalette>();
 	let framing = $derived(resolveFraming(image?.framing));
 	let focalPoint = $derived(`${framing.x}% ${framing.y}%`);
+	let ditherOffsetX = $derived((1 - framing.scale) * (framing.x / 100 - 0.5));
+	let ditherOffsetY = $derived((1 - framing.scale) * (framing.y / 100 - 0.5));
 	let positionedImage = $derived.by((): PositionedImage | undefined => {
 		if (
 			!image ||
@@ -84,6 +91,12 @@
 	}
 
 	onMount(() => {
+		const rootStyles = getComputedStyle(document.documentElement);
+		const back = rootStyles.getPropertyValue('--color-background').trim();
+		const front = rootStyles.getPropertyValue('--color-bright').trim();
+
+		if (back && front) ditherPalette = { back, front };
+
 		const measureFrame = () => {
 			const bounds = mediaElement.getBoundingClientRect();
 			frameWidth = bounds.width;
@@ -100,7 +113,13 @@
 	});
 </script>
 
-<figure class:pointed={shape === 'pointed'} class="portrait-image" style:width style:height>
+<figure
+	class:pointed={shape === 'pointed'}
+	class:dithered
+	class="portrait-image"
+	style:width
+	style:height
+>
 	<div class="media" bind:this={mediaElement}>
 		{#if image}
 			<img
@@ -115,6 +134,30 @@
 				style:top={positionedImage ? `${positionedImage.top}px` : undefined}
 				onload={handleImageLoad}
 			/>
+
+			{#if dithered && ditherPalette}
+				<ImageDithering
+					class="portrait-dither"
+					width="100%"
+					height="100%"
+					image={image.src}
+					colorBack={ditherPalette.back}
+					colorFront={ditherPalette.front}
+					colorHighlight={ditherPalette.front}
+					originalColors={false}
+					type="4x4"
+					size={1.5}
+					colorSteps={3}
+					scale={framing.scale}
+					originX={framing.x / 100}
+					originY={framing.y / 100}
+					offsetX={ditherOffsetX}
+					offsetY={ditherOffsetY}
+					fit="cover"
+					aria-hidden="true"
+
+				/>
+			{/if}
 		{:else}
 			<p>{placeholder}</p>
 		{/if}
@@ -192,6 +235,18 @@
 	.media img.positioned {
 		position: absolute;
 		max-width: none;
+	}
+
+	.portrait-image.dithered .media img {
+		filter: grayscale(1);
+	}
+
+	.media :global(.portrait-dither) {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
 	}
 
 	.media p {

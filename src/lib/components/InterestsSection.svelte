@@ -29,6 +29,7 @@
 						image={interest.image}
 						placeholder={copy.interestImagePlaceholder}
 						shape="pointed"
+						dithered={activeId !== interest.id}
 						height="var(--interest-height)"
 					/>
 					<button

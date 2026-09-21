@@ -82,11 +82,14 @@ Example with exact dimensions:
   Three equal-width, pointed `PortraitImage` frames stay in one horizontal row at every viewport
   width, with responsive gaps and no horizontal scrolling. Frames are `55dvh` tall above 640px and
   `50dvh` tall at 640px and below. A caption always identifies each interest. Selecting a portrait
-  updates one shared article below the row; the first entry is selected initially. The article places
-  its title and drop-cap description beside a separate, default-size rounded portrait. At 640px and
-  below, that portrait moves beneath the text and is centered. Portraits are native-button controls
-  with visible focus, pressed state, and polite selection announcements. The selected state uses
-  existing text and border colors and does not animate.
+  updates one shared article below the row; the first entry is selected initially. Unselected selector
+  images use a static, monochrome 4x4 ordered dither with the same resolved framing as the full-color
+  selected image, so selection does not change the crop. Placeholders and the separate detail portrait
+  are not dithered. The article places its title and drop-cap description beside a separate,
+  default-size rounded portrait. At 640px and below, that portrait moves beneath the text and is
+  centered. Portraits are native-button controls with visible focus, pressed state, and polite
+  selection announcements. The selected state uses existing text and border colors and does not
+  animate.
 - **Background:** The dither shader is fixed to the visible viewport and fills its `100dvw` by
   `100dvh` wrapper at every screen size. Its canvas resizes with the viewport while the existing
   shader appearance, animation, and render budget remain unchanged; it does not grow with the
