@@ -120,7 +120,7 @@
 	}
 
 	.selected :global(.outline path) {
-		stroke: var(--color-text);
+		stroke: var(--color-bright);
 	}
 
 	.caption {
