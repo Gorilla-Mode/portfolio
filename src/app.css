@@ -44,6 +44,7 @@
 	color: var(--color-text);
 	background: var(--color-background);
 	text-wrap: pretty;
+	hyphens: auto;
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
