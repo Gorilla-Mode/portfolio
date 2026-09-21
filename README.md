@@ -1,42 +1,35 @@
-# sv
+# My portfolio
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+My dev portfolio, yeah, that's right.
 
-## Creating a project
+## Live site
+Live site of the portfolie is [here.](https://portfolio.tobias-olsen02.workers.dev/)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Stack
+
+- SvelteKit
+- Cloudflare Workers
+
+## Structure
+
+Edit portfolio content in [`src/lib/content.ts`](src/lib/content.ts).Design conventions are in [`DESIGN.md`](DESIGN.md).
+
+## Local commands
 
 ```sh
-# create a new project
-npx sv create my-app
+npm install
 ```
 
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@0.17.0 create --template minimal --types ts --add sveltekit-adapter="adapter:cloudflare+cfTarget:workers" eslint prettier --install npm portfolio
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+_Install dependencies._
 
 ```sh
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
+_Start the Vite development server._
 
 ```sh
-npm run build
+npm run build && wrangler dev
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+_Build the project and start the Cloudflare Workers development server._
