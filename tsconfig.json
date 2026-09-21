@@ -2,8 +2,9 @@
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
 		"rewriteRelativeImportExtensions": true,
-		"allowJs": true,
-		"checkJs": true,
+		// App code uses TypeScript; Wrangler references generated JavaScript in .svelte-kit.
+		"allowJs": false,
+		"checkJs": false,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
@@ -11,6 +12,6 @@
 		"sourceMap": true,
 		"strict": true,
 		"moduleResolution": "bundler",
-		"types": ["./src/worker-configuration.d.ts", "node"]
+		"types": ["./worker-configuration.d.ts", "node"]
 	}
 }
