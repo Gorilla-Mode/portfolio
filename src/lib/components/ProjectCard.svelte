@@ -43,7 +43,7 @@
 	}
 
 	.card-link:hover h3 {
-		border-color: var(--color-text);
+		border-color: var(--color-bright);
 	}
 
 	.project-number {

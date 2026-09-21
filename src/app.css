@@ -1,12 +1,22 @@
 :root {
 	color-scheme: dark;
 
-	/* Every UI color lives here. Components only reference these tokens. */
+	/* Every UI color lives here. Components only reference these tokens.
+
+	Possible reds:
+	d11f19
+	801a1a
+	ef0a02
+	960c1c
+
+	*/
 	--color-background: #121212;
 	--color-surface: #1c1c1c;
-	--color-accent: #080808;
+	--color-accent: #231214;
+	--color-bright: #960c1c;
 	--color-text: #f2f2f2;
 	--color-text-muted: #aaaaaa;
+	--color-text-bright: var(--color-bright);
 	--color-border: #383838;
 	--color-focus: var(--color-text);
 	--color-selection-background: var(--color-text);
@@ -68,6 +78,7 @@ h3 {
 h1,
 h2 {
 	font-family: var(--font-header);
+	color: var(--color-text-bright);
 }
 
 a {
