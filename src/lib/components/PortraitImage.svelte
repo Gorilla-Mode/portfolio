@@ -93,7 +93,7 @@
 	onMount(() => {
 		const rootStyles = getComputedStyle(document.documentElement);
 		const back = rootStyles.getPropertyValue('--color-background').trim();
-		const front = rootStyles.getPropertyValue('--color-bright').trim();
+		const front = rootStyles.getPropertyValue('--color-dither-bright').trim();
 
 		if (back && front) ditherPalette = { back, front };
 
