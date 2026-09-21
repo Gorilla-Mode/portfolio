@@ -1,6 +1,28 @@
 <script lang="ts">
-	type Portrait = { src: string; alt: string };
+	import { onMount } from 'svelte';
+	import type { PortraitFraming } from '$lib/content';
+
+	type Portrait = { src: string; alt: string; framing?: PortraitFraming };
 	type Shape = 'rounded' | 'pointed';
+	type ResolvedFraming = Required<PortraitFraming>;
+	type PositionedImage = {
+		width: number;
+		height: number;
+		left: number;
+		top: number;
+	};
+
+	function numberOr(value: number | undefined, fallback: number): number {
+		return typeof value === 'number' && Number.isFinite(value) ? value : fallback;
+	}
+
+	function resolveFraming(framing?: PortraitFraming): ResolvedFraming {
+		const x = Math.min(100, Math.max(0, numberOr(framing?.x, 50)));
+		const y = Math.min(100, Math.max(0, numberOr(framing?.y, 50)));
+		const scale = numberOr(framing?.scale, 1);
+
+		return { x, y, scale: scale > 0 ? scale : 1 };
+	}
 
 	let {
 		image,
@@ -15,12 +37,84 @@
 		width?: string;
 		height?: string;
 	} = $props();
+
+	let mediaElement: HTMLDivElement;
+	let imageElement = $state<HTMLImageElement>();
+	let frameWidth = $state(0);
+	let frameHeight = $state(0);
+	let intrinsicWidth = $state(0);
+	let intrinsicHeight = $state(0);
+	let measuredSource = $state<string>();
+	let framing = $derived(resolveFraming(image?.framing));
+	let focalPoint = $derived(`${framing.x}% ${framing.y}%`);
+	let positionedImage = $derived.by((): PositionedImage | undefined => {
+		if (
+			!image ||
+			measuredSource !== image.src ||
+			frameWidth <= 0 ||
+			frameHeight <= 0 ||
+			intrinsicWidth <= 0 ||
+			intrinsicHeight <= 0
+		) {
+			return undefined;
+		}
+
+		const coverScale = Math.max(frameWidth / intrinsicWidth, frameHeight / intrinsicHeight);
+		const width = intrinsicWidth * coverScale * framing.scale;
+		const height = intrinsicHeight * coverScale * framing.scale;
+
+		return {
+			width,
+			height,
+			left: ((frameWidth - width) * framing.x) / 100,
+			top: ((frameHeight - height) * framing.y) / 100
+		};
+	});
+
+	function measureImage(element: HTMLImageElement): void {
+		if (!element.complete || element.naturalWidth <= 0 || element.naturalHeight <= 0) return;
+
+		intrinsicWidth = element.naturalWidth;
+		intrinsicHeight = element.naturalHeight;
+		measuredSource = element.getAttribute('src') ?? undefined;
+	}
+
+	function handleImageLoad(event: Event): void {
+		measureImage(event.currentTarget as HTMLImageElement);
+	}
+
+	onMount(() => {
+		const measureFrame = () => {
+			const bounds = mediaElement.getBoundingClientRect();
+			frameWidth = bounds.width;
+			frameHeight = bounds.height;
+		};
+
+		const observer = new ResizeObserver(measureFrame);
+		observer.observe(mediaElement);
+		measureFrame();
+
+		if (imageElement) measureImage(imageElement);
+
+		return () => observer.disconnect();
+	});
 </script>
 
 <figure class:pointed={shape === 'pointed'} class="portrait-image" style:width style:height>
-	<div class="media">
+	<div class="media" bind:this={mediaElement}>
 		{#if image}
-			<img src={image.src} alt={image.alt} />
+			<img
+				bind:this={imageElement}
+				class:positioned={positionedImage !== undefined}
+				src={image.src}
+				alt={image.alt}
+				style:object-position={focalPoint}
+				style:width={positionedImage ? `${positionedImage.width}px` : undefined}
+				style:height={positionedImage ? `${positionedImage.height}px` : undefined}
+				style:left={positionedImage ? `${positionedImage.left}px` : undefined}
+				style:top={positionedImage ? `${positionedImage.top}px` : undefined}
+				onload={handleImageLoad}
+			/>
 		{:else}
 			<p>{placeholder}</p>
 		{/if}
@@ -70,6 +164,7 @@
 	.media {
 		position: absolute;
 		inset: 0;
+		overflow: hidden;
 		background: var(--color-surface);
 		-webkit-mask-image: var(--arch-mask), linear-gradient(#000 0 0);
 		mask-image: var(--arch-mask), linear-gradient(#000 0 0);
@@ -92,6 +187,11 @@
 	.media img {
 		display: block;
 		object-fit: cover;
+	}
+
+	.media img.positioned {
+		position: absolute;
+		max-width: none;
 	}
 
 	.media p {

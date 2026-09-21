@@ -2,22 +2,37 @@ import type { Locale } from './i18n';
 
 type Localized<T> = Record<Locale, T>;
 
+export type PortraitFraming = {
+	x?: number;
+	y?: number;
+	scale?: number;
+};
+
+export type PortraitContentImage = {
+	src: string;
+	alt: Localized<string>;
+	framing?: PortraitFraming;
+};
+
+export type LocalizedPortraitImage = {
+	src: string;
+	alt: string;
+	framing?: PortraitFraming;
+};
+
 export type Profile = {
 	name: string;
 	role: Localized<string>;
 	bio: Localized<string>;
 	github?: `https://${string}` | `http://${string}`;
 	linkedin?: `https://${string}` | `http://${string}`;
-	image?: {
-		src: string;
-		alt: Localized<string>;
-	};
+	image?: PortraitContentImage;
 };
 
 export type LocalizedProfile = Omit<Profile, 'role' | 'bio' | 'image'> & {
 	role: string;
 	bio: string;
-	image?: { src: string; alt: string };
+	image?: LocalizedPortraitImage;
 };
 
 // Replace these placeholders with your own name, introduction, and projects.
@@ -58,14 +73,8 @@ export type Interest = {
 	title: Localized<string>;
 	caption: Localized<string>;
 	description: Localized<string>;
-	image?: {
-		src: string;
-		alt: Localized<string>;
-	};
-	detailImage?: {
-		src: string;
-		alt: Localized<string>;
-	};
+	image?: PortraitContentImage;
+	detailImage?: PortraitContentImage;
 };
 
 export type LocalizedInterest = Omit<
@@ -75,8 +84,8 @@ export type LocalizedInterest = Omit<
 	title: string;
 	caption: string;
 	description: string;
-	image?: { src: string; alt: string };
-	detailImage?: { src: string; alt: string };
+	image?: LocalizedPortraitImage;
+	detailImage?: LocalizedPortraitImage;
 };
 
 export function localizeProfile(locale: Locale): LocalizedProfile {
@@ -86,7 +95,11 @@ export function localizeProfile(locale: Locale): LocalizedProfile {
 		bio: profile.bio[locale],
 		github: profile.github,
 		linkedin: profile.linkedin,
-		image: profile.image && { src: profile.image.src, alt: profile.image.alt[locale] }
+		image: profile.image && {
+			src: profile.image.src,
+			alt: profile.image.alt[locale],
+			framing: profile.image.framing
+		}
 	};
 }
 
@@ -105,10 +118,15 @@ export function localizeInterest(interest: Interest, locale: Locale): LocalizedI
 		title: interest.title[locale],
 		caption: interest.caption[locale],
 		description: interest.description[locale],
-		image: interest.image && { src: interest.image.src, alt: interest.image.alt[locale] },
+		image: interest.image && {
+			src: interest.image.src,
+			alt: interest.image.alt[locale],
+			framing: interest.image.framing
+		},
 		detailImage: interest.detailImage && {
 			src: interest.detailImage.src,
-			alt: interest.detailImage.alt[locale]
+			alt: interest.detailImage.alt[locale],
+			framing: interest.detailImage.framing
 		}
 	};
 }
@@ -222,10 +240,27 @@ export const interests: Interest[] = [
 			nb: 'Bytt ut denne plassholderen med en annen interesse og en kort, personlig tekst om hvorfor den betyr noe for deg.'
 		},
 		image: {
+			src: '/img/interests/photography_2.jpg',
+			alt: {
+				en: 'Photography',
+				nb: 'Fotografi'
+			},
+			framing: {
+				x: 30,
+				y: 50,
+				scale: 1.2
+			}
+		},
+		detailImage: {
 			src: '/img/interests/photography_1.jpg',
 			alt: {
 				en: 'Photography',
 				nb: 'Fotografi'
+			},
+			framing: {
+				x: 55,
+				y: 50,
+				scale: 1.0
 			}
 		}
 	}
