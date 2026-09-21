@@ -26,23 +26,29 @@
 	<div class="project-body">
 		<section aria-labelledby="about-project-heading">
 			<h2 id="about-project-heading">About the project</h2>
-			{#each project.longDescription as paragraph, index (index)}
-				<p class="detail-paragraph">{paragraph}</p>
-			{/each}
+			{#if project.longDescription[0]}
+				<p class="detail-paragraph first-description">{project.longDescription[0]}</p>
+			{/if}
+			{#if project.longDescription.length > 1}
+				<div class="remaining-description">
+					{#each project.longDescription.slice(1) as paragraph, index (index)}
+						<p class="detail-paragraph">{paragraph}</p>
+					{/each}
+				</div>
+			{/if}
 		</section>
 
 		<aside aria-label="Project details">
-			<div class="detail-group">
-				<h2 class="eyebrow">Technologies</h2>
+			<h2 class="eyebrow">Technologies</h2>
+			<div class="metadata-middle">
 				<ul class="technologies">
 					{#each project.technologies as technology (technology)}
 						<li>{technology}</li>
 					{/each}
 				</ul>
-			</div>
-
-			<div class="detail-group">
 				<h2 class="eyebrow">Links</h2>
+			</div>
+			<div class="links-list">
 				{#if project.github}
 					<a href={project.github} rel="external">
 						View on GitHub <span aria-hidden="true">↗</span>
@@ -51,7 +57,9 @@
 					<p class="link-placeholder">GitHub link to be added</p>
 				{/if}
 				{#if project.href}
-					<a href={project.href} rel="external">Visit project <span aria-hidden="true">↗</span></a>
+					<a href={project.href} rel="external">
+						Visit project <span aria-hidden="true">↗</span>
+					</a>
 				{/if}
 			</div>
 		</aside>
@@ -87,10 +95,6 @@
 		font-size: clamp(3rem, 8vw, 5.5rem);
 		line-height: 1.05;
 		letter-spacing: -0.07em;
-	}
-
-	h1 span {
-		color: var(--color-text-muted);
 	}
 
 	.summary {
@@ -133,32 +137,67 @@
 	.project-body {
 		display: grid;
 		grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr);
-		gap: var(--space-8);
+		grid-template-rows: repeat(3, auto);
+		column-gap: var(--space-8);
+		row-gap: var(--space-4);
 		padding-top: var(--space-8);
 	}
 
-	.project-body section {
+	.project-body > section,
+	.project-body > aside {
+		display: grid;
+		grid-template-rows: subgrid;
+		grid-row: 1 / span 3;
+		row-gap: var(--space-4);
+	}
+
+	.project-body > section {
+		grid-column: 1;
 		max-width: 40rem;
 	}
 
+	.project-body > aside {
+		grid-column: 2;
+	}
+
 	.project-body section h2 {
+		grid-row: 1;
 		font-size: clamp(1.75rem, 3vw, 2.25rem);
 		line-height: 1.2;
 		letter-spacing: -0.04em;
 	}
 
 	.detail-paragraph {
-		margin-top: var(--space-5);
 		color: var(--color-text-muted);
 	}
 
-	.detail-group + .detail-group {
-		margin-top: var(--space-7);
+	.first-description {
+		grid-row: 2;
 	}
 
-	.detail-group h2 {
-		margin-bottom: var(--space-4);
+	.remaining-description {
+		grid-row: 3;
+	}
+
+	.remaining-description .detail-paragraph + .detail-paragraph {
+		margin-top: var(--space-5);
+	}
+
+	.metadata-middle {
+		display: flex;
+		grid-row: 2;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: var(--space-5);
+	}
+
+	.project-body aside h2 {
 		font-family: var(--font-sans);
+	}
+
+	.project-body aside > h2 {
+		grid-row: 1;
+		align-self: end;
 	}
 
 	.technologies {
@@ -180,14 +219,20 @@
 		color: var(--color-text-muted);
 	}
 
-	.detail-group a,
-	.link-placeholder {
-		display: block;
-		padding-block: var(--space-2);
-		font-size: 0.875rem;
+	.links-list {
+		display: grid;
+		grid-row: 3;
+		align-content: start;
 	}
 
-	.detail-group a {
+	.links-list a,
+	.link-placeholder {
+		display: block;
+		font-size: 1rem;
+		line-height: 1.6;
+	}
+
+	.links-list a {
 		text-decoration: none;
 	}
 
@@ -198,7 +243,36 @@
 	@media (max-width: 40rem) {
 		.project-body {
 			grid-template-columns: minmax(0, 1fr);
+			grid-template-rows: auto;
 			gap: var(--space-7);
+		}
+
+		.project-body > section,
+		.project-body > aside {
+			display: block;
+			grid-column: auto;
+			grid-row: auto;
+		}
+
+		.first-description,
+		.remaining-description {
+			margin-top: var(--space-5);
+		}
+
+		.project-body aside > h2 {
+			margin-bottom: var(--space-4);
+		}
+
+		.metadata-middle {
+			display: block;
+		}
+
+		.metadata-middle h2 {
+			margin-top: var(--space-7);
+		}
+
+		.links-list {
+			margin-top: var(--space-4);
 		}
 	}
 </style>
