@@ -19,7 +19,7 @@
 
 <style>
 	section {
-		padding-top: clamp(4rem, 9vw, 7rem);
+		padding-top: clamp(2rem, 4.5vw, 3.5rem);
 		padding-bottom: clamp(4rem, 8vw, 6rem);
 	}
 
