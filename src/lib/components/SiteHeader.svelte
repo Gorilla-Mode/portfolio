@@ -37,6 +37,7 @@
 		align-items: center;
 		gap: var(--space-4);
 		min-height: 2.75rem;
+		color: var(--color-bright);
 		font-size: 0.9375rem;
 		font-weight: 500;
 		text-decoration: none;
@@ -46,7 +47,7 @@
 		flex-shrink: 0;
 		width: 1.125rem;
 		height: 1.125rem;
-		background: var(--color-text);
+		background: var(--color-bright);
 		box-shadow: var(--shadow-offset);
 	}
 
