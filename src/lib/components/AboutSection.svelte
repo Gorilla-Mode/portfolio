@@ -10,7 +10,7 @@
 <section id="about" aria-labelledby="about-heading">
 	<h1 id="about-heading">{name}</h1>
 	<p class="role">{role}</p>
-	<p class="bio">{bio}</p>
+	<p class="bio drop-cap">{bio}</p>
 	<a class="projects-link" href="#projects">
 		{exploreProjects}
 		<span aria-hidden="true">↓</span>
@@ -49,7 +49,6 @@
 		font-size: 1rem;
 		line-height: 1.8;
 		color: var(--color-text-muted);
-		text-wrap: pretty;
 	}
 
 	.projects-link {
