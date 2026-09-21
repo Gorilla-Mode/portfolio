@@ -40,5 +40,8 @@
 			"esbuild": true,
 			"workerd": true
 		}
+	},
+	"dependencies": {
+		"@devmischief/shaders-svelte": "^0.0.9"
 	}
 }
