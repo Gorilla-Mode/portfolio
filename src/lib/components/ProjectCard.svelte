@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import type { Project } from '$lib/content';
+	import type { LocalizedProject } from '$lib/content';
 
-	let { project, number }: { project: Project; number: number } = $props();
+	let { project, technologiesLabel }: { project: LocalizedProject; technologiesLabel: string } =
+		$props();
 </script>
 
 <article aria-labelledby={`${project.id}-title`}>
@@ -16,7 +17,7 @@
 			<span class="project-arrow" aria-hidden="true">↗</span>
 		</h3>
 		<p class="description">{project.description}</p>
-		<ul aria-label="Technologies">
+		<ul aria-label={technologiesLabel}>
 			{#each project.technologies as technology (technology)}
 				<li>{technology}</li>
 			{/each}

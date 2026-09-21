@@ -2,25 +2,33 @@
 	import AboutSection from '$lib/components/AboutSection.svelte';
 	import ProjectsSection from '$lib/components/ProjectsSection.svelte';
 	import SiteHeader from '$lib/components/SiteHeader.svelte';
-	import { profile, projects } from '$lib/content';
+	import { localizeProfile, localizeProject, profile, projects } from '$lib/content';
+	import { getLocaleContext, ui } from '$lib/i18n';
+
+	const language = getLocaleContext();
+	let copy = $derived(ui[language.locale]);
+	let localizedProfile = $derived(localizeProfile(language.locale));
+	let localizedProjects = $derived(
+		projects.map((project) => localizeProject(project, language.locale))
+	);
 </script>
 
 <svelte:head>
-	<title>{profile.name} — Portfolio</title>
-	<meta name="description" content={`About and selected projects by ${profile.name}.`} />
+	<title>{profile.name} — {copy.portfolio}</title>
+	<meta name="description" content={copy.pageDescription(profile.name)} />
 </svelte:head>
 
-<a class="skip-link" href="#main-content">Skip to content</a>
-<SiteHeader name={profile.name} />
+<a class="skip-link" href="#main-content">{copy.skipToContent}</a>
+<SiteHeader name={profile.name} {copy} />
 
 <main id="main-content" class="container" tabindex="-1">
-	<AboutSection {...profile} />
-	<ProjectsSection {projects} />
+	<AboutSection {...localizedProfile} exploreProjects={copy.exploreProjects} />
+	<ProjectsSection projects={localizedProjects} {copy} />
 </main>
 
 <footer class="container">
 	<p>{profile.name}<span>.</span></p>
-	<a href="#about">Back to top <span aria-hidden="true">↑</span></a>
+	<a href="#about">{copy.backToTop} <span aria-hidden="true">↑</span></a>
 </footer>
 
 <style>

@@ -1,20 +1,21 @@
 <script lang="ts">
-	import type { Project } from '$lib/content';
+	import type { LocalizedProject } from '$lib/content';
+	import { ui } from '$lib/i18n';
 	import ProjectCard from './ProjectCard.svelte';
 
-	let { projects }: { projects: Project[] } = $props();
+	let { projects, copy }: { projects: LocalizedProject[]; copy: (typeof ui)['en'] } = $props();
 </script>
 
 <section id="projects" aria-labelledby="projects-heading">
 	<div class="section-heading">
 		<div>
-			<h2 id="projects-heading">Selected work</h2>
+			<h2 id="projects-heading">{copy.selectedWork}</h2>
 		</div>
 	</div>
 
-	<ul class="project-grid" aria-label="Selected projects">
-		{#each projects as project, index (project.id)}
-			<li><ProjectCard {project} number={index + 1} /></li>
+	<ul class="project-grid" aria-label={copy.selectedProjects}>
+		{#each projects as project (project.id)}
+			<li><ProjectCard {project} technologiesLabel={copy.technologies} /></li>
 		{/each}
 	</ul>
 </section>

@@ -1,19 +1,24 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { ui } from '$lib/i18n';
+	import LanguageButton from './LanguageButton.svelte';
 
-	let { name }: { name: string } = $props();
+	let { name, copy }: { name: string; copy: (typeof ui)['en'] } = $props();
 </script>
 
 <header class="container">
-	<a class="identity" href={resolve('/#about')} aria-label={`${name} — about`}>
+	<a class="identity" href={resolve('/#about')} aria-label={copy.identityAbout(name)}>
 		<span class="mark" aria-hidden="true"></span>
 		<span>{name}</span>
 	</a>
 
-	<nav aria-label="Main navigation">
-		<a href={resolve('/#about')}>About</a>
-		<a href={resolve('/#projects')}>Projects</a>
-	</nav>
+	<div class="header-actions">
+		<nav aria-label={copy.mainNavigation}>
+			<a href={resolve('/#about')}>{copy.about}</a>
+			<a href={resolve('/#projects')}>{copy.projects}</a>
+		</nav>
+		<LanguageButton />
+	</div>
 </header>
 
 <style>
@@ -45,6 +50,12 @@
 		box-shadow: var(--shadow-offset);
 	}
 
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: var(--space-6);
+	}
+
 	nav {
 		display: flex;
 		gap: var(--space-6);
@@ -67,16 +78,27 @@
 
 	@media (max-width: 30rem) {
 		header {
-			gap: var(--space-4);
+			gap: var(--space-2);
 			min-height: 5.5rem;
 		}
 
-		nav {
-			gap: var(--space-4);
+		.identity {
+			min-width: 0;
 		}
 
-		nav .eyebrow {
-			display: none;
+		.identity span:last-child {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.header-actions {
+			flex-shrink: 0;
+			gap: var(--space-3);
+		}
+
+		nav {
+			gap: var(--space-3);
 		}
 	}
 </style>

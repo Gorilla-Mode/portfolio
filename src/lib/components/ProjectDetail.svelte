@@ -1,14 +1,20 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import type { Project } from '$lib/content';
+	import type { LocalizedProject } from '$lib/content';
+	import { ui } from '$lib/i18n';
+	import LanguageButton from './LanguageButton.svelte';
 
-	let { project }: { project: Project } = $props();
+	let { project, copy }: { project: LocalizedProject; copy: (typeof ui)['en'] } = $props();
 </script>
 
 <article class="project-detail" aria-labelledby="project-title">
-	<a class="back-link" href={resolve('/#projects')}>
-		<span aria-hidden="true">←</span> All projects
-	</a>
+	<div class="top-row">
+		<a class="back-link" href={resolve('/#projects')}>
+			<span aria-hidden="true">←</span>
+			{copy.allProjects}
+		</a>
+		<LanguageButton />
+	</div>
 
 	<header class="project-heading">
 		<h1 id="project-title">{project.title}</h1>
@@ -19,13 +25,13 @@
 		{#if project.image}
 			<img src={project.image.src} alt={project.image.alt} />
 		{:else}
-			<p>Project image to be added</p>
+			<p>{copy.projectImagePlaceholder}</p>
 		{/if}
 	</figure>
 
 	<div class="project-body">
 		<section aria-labelledby="about-project-heading">
-			<h2 id="about-project-heading">About the project</h2>
+			<h2 id="about-project-heading">{copy.aboutProject}</h2>
 			{#if project.longDescription[0]}
 				<p class="detail-paragraph first-description">{project.longDescription[0]}</p>
 			{/if}
@@ -38,27 +44,27 @@
 			{/if}
 		</section>
 
-		<aside aria-label="Project details">
-			<h2 class="eyebrow">Technologies</h2>
+		<aside aria-label={copy.projectDetails}>
+			<h2 class="eyebrow">{copy.technologies}</h2>
 			<div class="metadata-middle">
 				<ul class="technologies">
 					{#each project.technologies as technology (technology)}
 						<li>{technology}</li>
 					{/each}
 				</ul>
-				<h2 class="eyebrow">Links</h2>
+				<h2 class="eyebrow">{copy.links}</h2>
 			</div>
 			<div class="links-list">
 				{#if project.github}
 					<a href={project.github} rel="external">
-						View on GitHub <span aria-hidden="true">↗</span>
+						{copy.viewOnGithub} <span aria-hidden="true">↗</span>
 					</a>
 				{:else}
-					<p class="link-placeholder">GitHub link to be added</p>
+					<p class="link-placeholder">{copy.githubPlaceholder}</p>
 				{/if}
 				{#if project.href}
 					<a href={project.href} rel="external">
-						Visit project <span aria-hidden="true">↗</span>
+						{copy.visitProject} <span aria-hidden="true">↗</span>
 					</a>
 				{/if}
 			</div>
@@ -68,7 +74,16 @@
 
 <style>
 	.project-detail {
-		padding-block: var(--space-7) var(--space-9);
+		padding-bottom: var(--space-9);
+	}
+
+	.top-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4);
+		min-height: 6.5rem;
+		padding-block: var(--space-5);
 	}
 
 	.back-link {
@@ -273,6 +288,12 @@
 
 		.links-list {
 			margin-top: var(--space-4);
+		}
+	}
+
+	@media (max-width: 30rem) {
+		.top-row {
+			min-height: 5.5rem;
 		}
 	}
 </style>
