@@ -208,18 +208,25 @@ export const interests: Interest[] = [
 		}
 	},
 	{
-		id: 'interest-three',
+		id: 'Photography',
 		title: {
-			en: 'Interest three',
-			nb: 'Interesse tre'
+			en: 'Photography',
+			nb: 'Fotografi'
 		},
 		caption: {
-			en: 'Interest three',
-			nb: 'Interesse tre'
+			en: 'Photography',
+			nb: 'Fotografi'
 		},
 		description: {
 			en: 'Replace this placeholder with another interest and a short, personal note about why it matters to you.',
 			nb: 'Bytt ut denne plassholderen med en annen interesse og en kort, personlig tekst om hvorfor den betyr noe for deg.'
+		},
+		image: {
+			src: '/img/interests/photography_1.jpg',
+			alt: {
+				en: 'Photography',
+				nb: 'Fotografi'
+			}
 		}
 	}
 ];
