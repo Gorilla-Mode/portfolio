@@ -2,7 +2,7 @@
 
 A quiet, monochrome portfolio: short About, Projects, and Interests sections on one scrolling page,
 with a dedicated detail page for each project.
-Large typography, generous spacing, thin borders, and square shapes give the work room to breathe.
+Large typography, compact and consistent spacing, thin borders, and square shapes give the work room to breathe.
 
 - **Palette:** Every UI color is defined exclusively in `src/app.css`. Components use its CSS
   variables for backgrounds, surfaces, text, borders, links, focus, and selection. The accent is a
@@ -39,14 +39,23 @@ Example with exact dimensions:
   selected-interest description, project detail summary, and first long-description paragraph start
   with a bright, two-line drop cap in the heading font. Role text, headings, project cards, metadata,
   and later description paragraphs do not use drop caps.
-- **Layout:** A centered column up to 960px wide. Compact header, spacious introduction, two-column
+- **Layout:** A centered column up to 960px wide. Compact header and introduction, two-column
   project grid, and a small footer. Project detail pages use the same column, with a large image area
   and a text-and-metadata layout. Detail pages start with an “All projects” back link instead of the
   site header. The detail page back-link row shares the homepage header's height, without its border.
   A language button sits at the far right of the homepage header and beside the detail page back
   link. It reads like a header link, with bright text and no box. On narrow screens, it stays right
-  aligned with room for the navigation. The About portrait sits to the right of the introduction. At
-  640px and below, it moves above the text, and projects and detail content stack into one column.
+  aligned with room for the navigation. The About portrait sits to the right of the introduction,
+  with its top aligned to the name heading. At 640px and below, it moves above the text, and projects
+  and detail content stack into one column.
+- **Spacing:** Shared spacing variables in `src/app.css` define section top/bottom padding of
+  2rem/3rem, reducing to 1.5rem/2rem at 640px and below. Section headings have no extra top margin
+  and use a 1.5rem gap before their content. Major content and column gaps are 2rem, reducing to
+  1.5rem at 640px and below; text blocks use 1rem. Cards use 1.5rem padding, interest captions use
+  a 0.75rem top gap, and the footer uses 1.5rem vertical padding. The homepage header and project
+  back-link row share a 5.5rem minimum height and 1rem vertical padding, reducing to 4.5rem and
+  0.75rem at 480px and below. Keep page gutters, control heights, drop-cap adjustments, and 6px
+  shadow clearance independent of this spacing rhythm.
 - **Interests:** The Interests section follows Projects and uses the same section-heading treatment.
   Three equal-width, pointed `PortraitImage` frames stay in one horizontal row at every viewport
   width, with responsive gaps and no horizontal scrolling. Frames are `55dvh` tall above 640px and

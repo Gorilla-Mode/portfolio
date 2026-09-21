@@ -22,8 +22,7 @@
 
 <style>
 	section {
-		padding-top: var(--space-7);
-		padding-bottom: var(--space-9);
+		padding-block: var(--section-padding-start) var(--section-padding-end);
 		border-top: 1px solid var(--color-border);
 	}
 
@@ -32,11 +31,10 @@
 		align-items: end;
 		justify-content: space-between;
 		gap: var(--space-5);
-		margin-bottom: var(--space-7);
+		margin-bottom: var(--section-heading-gap);
 	}
 
 	h2 {
-		margin-top: var(--space-4);
 		font-size: clamp(2rem, 4vw, 2.75rem);
 		line-height: 1.15;
 		letter-spacing: -0.05em;
@@ -56,7 +54,7 @@
 	.project-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: var(--space-6);
+		gap: var(--content-gap);
 		margin: 0;
 		padding: 0 var(--offset) var(--offset) 0;
 		list-style: none;
@@ -70,7 +68,6 @@
 		.section-heading {
 			align-items: start;
 			flex-direction: column;
-			margin-bottom: var(--space-6);
 		}
 
 		.section-note {

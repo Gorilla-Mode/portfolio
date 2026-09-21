@@ -55,7 +55,7 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: var(--space-5);
-		padding-block: var(--space-5) var(--space-7);
+		padding-block: var(--space-5);
 		border-top: 1px solid var(--color-border);
 		font-size: 0.75rem;
 		color: var(--color-text-muted);

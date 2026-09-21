@@ -35,6 +35,14 @@
 	--space-7: 3rem;
 	--space-8: 4rem;
 	--space-9: 6rem;
+	--section-padding-start: var(--space-6);
+	--section-padding-end: var(--space-7);
+	--section-heading-gap: var(--space-5);
+	--content-gap: var(--space-6);
+	--text-gap: var(--space-4);
+	--card-padding: var(--space-5);
+	--header-min-height: 5.5rem;
+	--header-padding: var(--space-4);
 	--content-width: 60rem;
 	--page-gutter: clamp(1.25rem, 5vw, 3rem);
 	--offset: 6px;
@@ -135,9 +143,22 @@ main[id] {
 }
 
 @media (max-width: 40rem) {
+	:root {
+		--section-padding-start: var(--space-5);
+		--section-padding-end: var(--space-6);
+		--content-gap: var(--space-5);
+	}
+
 	.drop-cap::first-letter {
 		margin-right: 0.1em;
 		font-size: 3em;
+	}
+}
+
+@media (max-width: 30rem) {
+	:root {
+		--header-min-height: 4.5rem;
+		--header-padding: var(--space-3);
 	}
 }
 

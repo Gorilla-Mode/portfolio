@@ -49,7 +49,7 @@
 	</div>
 
 	<div class="portrait">
-		<PortraitImage {image} placeholder={profileImagePlaceholder} height="50vh" />
+		<PortraitImage {image} placeholder={profileImagePlaceholder} height="45vh" />
 	</div>
 </section>
 
@@ -58,10 +58,9 @@
 		display: grid;
 		grid-template-areas: 'copy portrait';
 		grid-template-columns: minmax(0, 1fr) minmax(12rem, 18rem);
-		align-items: center;
-		gap: clamp(var(--space-6), 7vw, var(--space-8));
-		padding-top: clamp(2rem, 4.5vw, 3.5rem);
-		padding-bottom: clamp(4rem, 8vw, 6rem);
+		align-items: start;
+		gap: var(--content-gap);
+		padding-block: var(--section-padding-start) var(--section-padding-end);
 	}
 
 	.about-copy {
@@ -82,7 +81,6 @@
 	}
 
 	h1 {
-		margin-top: var(--space-6);
 		font-size: clamp(3.75rem, 10vw, 7rem);
 		font-weight: 500;
 		line-height: 1.04;
@@ -95,7 +93,7 @@
 	}
 
 	.role {
-		margin-top: var(--space-5);
+		margin-top: var(--text-gap);
 		font-size: clamp(1.125rem, 2.5vw, 1.5rem);
 		line-height: 1.4;
 		letter-spacing: -0.025em;
@@ -103,7 +101,7 @@
 
 	.bio {
 		max-width: 34rem;
-		margin-top: var(--space-5);
+		margin-top: var(--text-gap);
 		font-size: 1rem;
 		line-height: 1.8;
 		color: var(--color-text-muted);
@@ -113,7 +111,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--space-3) var(--space-5);
-		margin: var(--space-5) 0 0;
+		margin: var(--text-gap) 0 0;
 		padding: 0;
 		list-style: none;
 		font-size: 0.8125rem;
@@ -141,7 +139,7 @@
 		align-items: center;
 		gap: var(--space-5);
 		min-height: 2.75rem;
-		margin-top: var(--space-6);
+		margin-top: var(--space-5);
 		font-size: 0.8125rem;
 		text-decoration: none;
 	}
@@ -159,7 +157,6 @@
 				'portrait'
 				'copy';
 			grid-template-columns: minmax(0, 1fr);
-			gap: var(--space-6);
 		}
 
 		.portrait {
