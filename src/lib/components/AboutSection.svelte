@@ -1,26 +1,54 @@
 <script lang="ts">
+	import type { LocalizedProfile } from '$lib/content';
+	import PortraitImage from './PortraitImage.svelte';
+
 	let {
 		name,
 		role,
 		bio,
-		exploreProjects
-	}: { name: string; role: string; bio: string; exploreProjects: string } = $props();
+		image,
+		exploreProjects,
+		profileImagePlaceholder
+	}: LocalizedProfile & { exploreProjects: string; profileImagePlaceholder: string } = $props();
 </script>
 
 <section id="about" aria-labelledby="about-heading">
-	<h1 id="about-heading">{name}</h1>
-	<p class="role">{role}</p>
-	<p class="bio drop-cap">{bio}</p>
-	<a class="projects-link" href="#projects">
-		{exploreProjects}
-		<span aria-hidden="true">↓</span>
-	</a>
+	<div class="about-copy">
+		<h1 id="about-heading">{name}</h1>
+		<p class="role">{role}</p>
+		<p class="bio drop-cap">{bio}</p>
+		<a class="projects-link" href="#projects">
+			{exploreProjects}
+			<span aria-hidden="true">↓</span>
+		</a>
+	</div>
+
+	<div class="portrait">
+		<PortraitImage {image} placeholder={profileImagePlaceholder} />
+	</div>
 </section>
 
 <style>
 	section {
+		display: grid;
+		grid-template-areas: 'copy portrait';
+		grid-template-columns: minmax(0, 1fr) minmax(12rem, 18rem);
+		align-items: center;
+		gap: clamp(var(--space-6), 7vw, var(--space-8));
 		padding-top: clamp(2rem, 4.5vw, 3.5rem);
 		padding-bottom: clamp(4rem, 8vw, 6rem);
+	}
+
+	.about-copy {
+		grid-area: copy;
+		min-width: 0;
+	}
+
+	.portrait {
+		grid-area: portrait;
+		width: 100%;
+		max-width: 18rem;
+		justify-self: end;
 	}
 
 	h1 {
@@ -66,5 +94,20 @@
 
 	a:hover {
 		color: var(--color-text);
+	}
+
+	@media (max-width: 40rem) {
+		section {
+			grid-template-areas:
+				'portrait'
+				'copy';
+			grid-template-columns: minmax(0, 1fr);
+			gap: var(--space-6);
+		}
+
+		.portrait {
+			width: min(70vw, 16rem);
+			justify-self: center;
+		}
 	}
 </style>

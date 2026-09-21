@@ -2,8 +2,24 @@ import type { Locale } from './i18n';
 
 type Localized<T> = Record<Locale, T>;
 
+export type Profile = {
+	name: string;
+	role: Localized<string>;
+	bio: Localized<string>;
+	image?: {
+		src: string;
+		alt: Localized<string>;
+	};
+};
+
+export type LocalizedProfile = Omit<Profile, 'role' | 'bio' | 'image'> & {
+	role: string;
+	bio: string;
+	image?: { src: string; alt: string };
+};
+
 // Replace these placeholders with your own name, introduction, and projects.
-export const profile = {
+export const profile: Profile = {
 	name: 'Your name',
 	role: {
 		en: 'Your role / specialty',
@@ -35,8 +51,13 @@ export type LocalizedProject = Omit<Project, 'description' | 'longDescription' |
 	image?: { src: string; alt: string };
 };
 
-export function localizeProfile(locale: Locale) {
-	return { name: profile.name, role: profile.role[locale], bio: profile.bio[locale] };
+export function localizeProfile(locale: Locale): LocalizedProfile {
+	return {
+		name: profile.name,
+		role: profile.role[locale],
+		bio: profile.bio[locale],
+		image: profile.image && { src: profile.image.src, alt: profile.image.alt[locale] }
+	};
 }
 
 export function localizeProject(project: Project, locale: Locale): LocalizedProject {

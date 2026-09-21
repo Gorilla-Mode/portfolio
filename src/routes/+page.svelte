@@ -22,7 +22,11 @@
 <SiteHeader name={profile.name} {copy} />
 
 <main id="main-content" class="container" tabindex="-1">
-	<AboutSection {...localizedProfile} exploreProjects={copy.exploreProjects} />
+	<AboutSection
+		{...localizedProfile}
+		exploreProjects={copy.exploreProjects}
+		profileImagePlaceholder={copy.profileImagePlaceholder}
+	/>
 	<ProjectsSection projects={localizedProjects} {copy} />
 </main>
 
