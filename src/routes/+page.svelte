@@ -37,6 +37,8 @@
 		{...localizedProfile}
 		exploreProjects={copy.exploreProjects}
 		profileImagePlaceholder={copy.profileImagePlaceholder}
+		githubPlaceholder={copy.githubPlaceholder}
+		linkedinPlaceholder={copy.linkedinPlaceholder}
 	/>
 	<ProjectsSection projects={localizedProjects} {copy} />
 	<InterestsSection interests={localizedInterests} {copy} />

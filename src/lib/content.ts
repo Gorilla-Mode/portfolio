@@ -6,6 +6,8 @@ export type Profile = {
 	name: string;
 	role: Localized<string>;
 	bio: Localized<string>;
+	github?: `https://${string}` | `http://${string}`;
+	linkedin?: `https://${string}` | `http://${string}`;
 	image?: {
 		src: string;
 		alt: Localized<string>;
@@ -82,6 +84,8 @@ export function localizeProfile(locale: Locale): LocalizedProfile {
 		name: profile.name,
 		role: profile.role[locale],
 		bio: profile.bio[locale],
+		github: profile.github,
+		linkedin: profile.linkedin,
 		image: profile.image && { src: profile.image.src, alt: profile.image.alt[locale] }
 	};
 }

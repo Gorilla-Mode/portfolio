@@ -59,16 +59,18 @@ Example with exact dimensions:
 - **Interaction:** Native section links, dotted underlines on hovered links by default, visible keyboard focus, and a
   skip link. The entire project card links to its detail page. Smooth scrolling only when reduced
   motion is not requested. No decorative animations.
-- **Content:** Edit the name, role, biography, optional portrait, typed project list, and typed
-  interest list in `src/lib/content.ts`.
+- **Content:** Edit the name, role, biography, optional portrait and social links, typed project list,
+  and typed interest list in `src/lib/content.ts`.
   English (`en`) and Norwegian Bokmål (`nb`) copy lives there and in `src/lib/i18n.ts`; language
   preference matching lives in `src/lib/locale.ts`. Names, project IDs, technology names, and URLs
   stay the same in both languages. All initial content is placeholder content. Each project has a
   longer description for its detail page. Each interest has a stable ID and localized title,
   caption, shared-detail description, selector image, and separate detail image.
-  Optional `github` and `href` URLs add links there. Optional profile, project, selector, and interest
-  detail images use a source and alt text in both languages, replacing their visible placeholders.
-  Omit these fields until real assets exist.
+  Optional profile `github` and `linkedin` HTTP(S) URLs add social links beneath the biography;
+  localized placeholders remain visible when they are omitted. Optional project `github` and `href`
+  URLs add links on project detail pages. Optional profile, project, selector, and interest detail
+  images use a source and alt text in both languages, replacing their visible placeholders. Omit
+  these fields until real destinations and assets exist.
 - **Language:** The button shows the destination language: `NOR` for Norsk (Bokmål) on English pages,
   `ENG` for English on Norwegian pages. The first response uses a valid `portfolio_lang` cookie or
   the browser language preference, falling back to English. Switching updates page copy, metadata,

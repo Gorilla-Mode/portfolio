@@ -41,6 +41,7 @@ export const ui = {
 		links: 'Links',
 		viewOnGithub: 'View on GitHub',
 		githubPlaceholder: 'GitHub link to be added',
+		linkedinPlaceholder: 'LinkedIn link to be added',
 		visitProject: 'Visit project',
 		switchLabel: 'Switch language to Norwegian Bokmål (Norsk)'
 	},
@@ -70,6 +71,7 @@ export const ui = {
 		links: 'Lenker',
 		viewOnGithub: 'Se på GitHub',
 		githubPlaceholder: 'GitHub-lenke kommer',
+		linkedinPlaceholder: 'LinkedIn-lenke kommer',
 		visitProject: 'Besøk prosjektet',
 		switchLabel: 'Bytt språk til engelsk'
 	}

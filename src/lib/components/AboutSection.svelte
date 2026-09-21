@@ -7,9 +7,18 @@
 		role,
 		bio,
 		image,
+		github,
+		linkedin,
 		exploreProjects,
-		profileImagePlaceholder
-	}: LocalizedProfile & { exploreProjects: string; profileImagePlaceholder: string } = $props();
+		profileImagePlaceholder,
+		githubPlaceholder,
+		linkedinPlaceholder
+	}: LocalizedProfile & {
+		exploreProjects: string;
+		profileImagePlaceholder: string;
+		githubPlaceholder: string;
+		linkedinPlaceholder: string;
+	} = $props();
 </script>
 
 <section id="about" aria-labelledby="about-heading">
@@ -17,6 +26,22 @@
 		<h1 id="about-heading">{name}</h1>
 		<p class="role">{role}</p>
 		<p class="bio drop-cap">{bio}</p>
+		<ul class="social-links" aria-label="Social links">
+			<li>
+				{#if github}
+					<a href={github} rel="external">GitHub <span aria-hidden="true">↗</span></a>
+				{:else}
+					<span class="social-placeholder">{githubPlaceholder}</span>
+				{/if}
+			</li>
+			<li>
+				{#if linkedin}
+					<a href={linkedin} rel="external">LinkedIn <span aria-hidden="true">↗</span></a>
+				{:else}
+					<span class="social-placeholder">{linkedinPlaceholder}</span>
+				{/if}
+			</li>
+		</ul>
 		<a class="projects-link" href="#projects">
 			{exploreProjects}
 			<span aria-hidden="true">↓</span>
@@ -81,6 +106,33 @@
 		margin-top: var(--space-5);
 		font-size: 1rem;
 		line-height: 1.8;
+		color: var(--color-text-muted);
+	}
+
+	.social-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3) var(--space-5);
+		margin: var(--space-5) 0 0;
+		padding: 0;
+		list-style: none;
+		font-size: 0.8125rem;
+	}
+
+	.social-links a {
+		display: inline-flex;
+		align-items: baseline;
+		gap: var(--space-1);
+		color: var(--color-text-muted);
+		text-decoration: none;
+	}
+
+	.social-links a:hover,
+	.social-links a:focus-visible {
+		color: var(--color-text);
+	}
+
+	.social-placeholder {
 		color: var(--color-text-muted);
 	}
 
