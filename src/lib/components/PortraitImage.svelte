@@ -5,28 +5,46 @@
 	let {
 		image,
 		placeholder,
-		shape = 'rounded'
-	}: { image?: Portrait; placeholder: string; shape?: Shape } = $props();
+		shape = 'rounded',
+		width,
+		height
+	}: {
+		image?: Portrait;
+		placeholder: string;
+		shape?: Shape;
+		width?: string;
+		height?: string;
+	} = $props();
 
 	const componentId = $props.id();
 	const clipId = `${componentId}-portrait-clip`;
-	let clipPath = $derived(
-		shape === 'pointed'
-			? 'M .5 0 C .18 .12 0 .3 0 .5 V 1 H 1 V .5 C 1 .3 .82 .12 .5 0 Z'
-			: 'M .5 0 A .5 .333 0 0 1 1 .333 V 1 H 0 V .333 A .5 .333 0 0 1 .5 0 Z'
-	);
-	let outlinePath = $derived(
-		shape === 'pointed'
-			? 'M 100 0 C 36 36 0 90 0 150 V 300 H 200 V 150 C 200 90 164 36 100 0 Z'
-			: 'M 100 0 A 100 100 0 0 1 200 100 V 300 H 0 V 100 A 100 100 0 0 1 100 0 Z'
-	);
+	let frameWidth = $state(0);
+	let frameHeight = $state(0);
+	let frameRatio = $derived(frameWidth > 0 && frameHeight > 0 ? frameWidth / frameHeight : 2 / 3);
+	let portraitPath = $derived.by(() => {
+		if (shape === 'pointed') {
+			const depth = Math.min(frameRatio * 0.75, 1);
+
+			return `M .5 0 C .18 ${depth * 0.24} 0 ${depth * 0.6} 0 ${depth} V 1 H 1 V ${depth} C 1 ${depth * 0.6} .82 ${depth * 0.24} .5 0 Z`;
+		}
+
+		const depth = Math.min(frameRatio * 0.5, 1);
+
+		return `M .5 0 A .5 ${depth} 0 0 1 1 ${depth} V 1 H 0 V ${depth} A .5 ${depth} 0 0 1 .5 0 Z`;
+	});
 </script>
 
-<figure class="portrait-image">
+<figure
+	class="portrait-image"
+	style:width
+	style:height
+	bind:clientWidth={frameWidth}
+	bind:clientHeight={frameHeight}
+>
 	<svg class="clip-definition" aria-hidden="true" width="0" height="0">
 		<defs>
 			<clipPath id={clipId} clipPathUnits="objectBoundingBox">
-				<path d={clipPath} />
+				<path d={portraitPath} />
 			</clipPath>
 		</defs>
 	</svg>
@@ -39,8 +57,8 @@
 		{/if}
 	</div>
 
-	<svg class="outline" viewBox="0 0 200 300" aria-hidden="true">
-		<path d={outlinePath} />
+	<svg class="outline" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+		<path d={portraitPath} />
 	</svg>
 </figure>
 

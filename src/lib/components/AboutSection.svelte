@@ -24,7 +24,7 @@
 	</div>
 
 	<div class="portrait">
-		<PortraitImage {image} placeholder={profileImagePlaceholder} />
+		<PortraitImage {image} placeholder={profileImagePlaceholder} height="50vh" />
 	</div>
 </section>
 
@@ -46,9 +46,14 @@
 
 	.portrait {
 		grid-area: portrait;
+		min-width: 0;
 		width: 100%;
 		max-width: 18rem;
 		justify-self: end;
+	}
+
+	.portrait :global(.portrait-image) {
+		max-width: 100%;
 	}
 
 	h1 {

@@ -11,6 +11,27 @@ Large typography, generous spacing, thin borders, and square shapes give the wor
   offset equally **6px down and 6px right**, using `--color-accent`. Use `--shadow-offset` with no
   blur or spread; leave room around the shape so it is never clipped. The About portrait is the sole
   exception: its 2:3 frame has a Gothic-window top, rounded by default with a pointed variant available.
+- **Portrait sizing:** `PortraitImage` accepts optional `width` and `height` props containing any
+  valid CSS size, including lengths, viewport units, percentages, and `min()`, `max()`, `clamp()`, or
+  `calc()` expressions. Without either prop it remains responsive with a 2:3 aspect ratio. The props
+  act independently: `height="600px"` and `height="100dvh"` retain the current width,
+  `width="24rem"` retains the 2:3 ratio, and both can be supplied for exact dimensions. Images
+  continue to cover and crop within the configured frame rather than distort. The Gothic top keeps
+  its proportions relative to the portrait width, so changing the height only changes the straight
+  body below it. If the frame is shorter than the arch, the arch depth is capped to the frame height.
+
+Example with exact dimensions:
+
+```svelte
+<PortraitImage
+	{image}
+	placeholder={profileImagePlaceholder}
+	shape="pointed"
+	width="18rem"
+	height="100dvh"
+/>
+```
+
 - **Typography:** Jacquard 24 for headings, Jersey 20 for body copy, and Atkinson Hyperlegible Mono
   for section numbers and technology labels, each with a system font fallback. Large, tightly spaced
   headings contrast with relaxed body text. All text uses pretty wrapping and automatic hyphenation
