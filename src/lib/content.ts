@@ -2,8 +2,26 @@ import type { Locale } from './i18n';
 
 type Localized<T> = Record<Locale, T>;
 
+export type Profile = {
+	name: string;
+	role: Localized<string>;
+	bio: Localized<string>;
+	github?: `https://${string}` | `http://${string}`;
+	linkedin?: `https://${string}` | `http://${string}`;
+	image?: {
+		src: string;
+		alt: Localized<string>;
+	};
+};
+
+export type LocalizedProfile = Omit<Profile, 'role' | 'bio' | 'image'> & {
+	role: string;
+	bio: string;
+	image?: { src: string; alt: string };
+};
+
 // Replace these placeholders with your own name, introduction, and projects.
-export const profile = {
+export const profile: Profile = {
 	name: 'Your name',
 	role: {
 		en: 'Your role / specialty',
@@ -35,8 +53,41 @@ export type LocalizedProject = Omit<Project, 'description' | 'longDescription' |
 	image?: { src: string; alt: string };
 };
 
-export function localizeProfile(locale: Locale) {
-	return { name: profile.name, role: profile.role[locale], bio: profile.bio[locale] };
+export type Interest = {
+	id: string;
+	title: Localized<string>;
+	caption: Localized<string>;
+	description: Localized<string>;
+	image?: {
+		src: string;
+		alt: Localized<string>;
+	};
+	detailImage?: {
+		src: string;
+		alt: Localized<string>;
+	};
+};
+
+export type LocalizedInterest = Omit<
+	Interest,
+	'title' | 'caption' | 'description' | 'image' | 'detailImage'
+> & {
+	title: string;
+	caption: string;
+	description: string;
+	image?: { src: string; alt: string };
+	detailImage?: { src: string; alt: string };
+};
+
+export function localizeProfile(locale: Locale): LocalizedProfile {
+	return {
+		name: profile.name,
+		role: profile.role[locale],
+		bio: profile.bio[locale],
+		github: profile.github,
+		linkedin: profile.linkedin,
+		image: profile.image && { src: profile.image.src, alt: profile.image.alt[locale] }
+	};
 }
 
 export function localizeProject(project: Project, locale: Locale): LocalizedProject {
@@ -45,6 +96,20 @@ export function localizeProject(project: Project, locale: Locale): LocalizedProj
 		description: project.description[locale],
 		longDescription: project.longDescription[locale],
 		image: project.image && { src: project.image.src, alt: project.image.alt[locale] }
+	};
+}
+
+export function localizeInterest(interest: Interest, locale: Locale): LocalizedInterest {
+	return {
+		...interest,
+		title: interest.title[locale],
+		caption: interest.caption[locale],
+		description: interest.description[locale],
+		image: interest.image && { src: interest.image.src, alt: interest.image.alt[locale] },
+		detailImage: interest.detailImage && {
+			src: interest.detailImage.src,
+			alt: interest.detailImage.alt[locale]
+		}
 	};
 }
 
@@ -107,5 +172,54 @@ export const projects: Project[] = [
 			]
 		},
 		technologies: ['HTML', 'CSS', 'JavaScript']
+	}
+];
+
+// These entries are placeholders. Add image or detailImage with localized alt text when ready.
+export const interests: Interest[] = [
+	{
+		id: 'fishing',
+		title: {
+			en: 'Fishing',
+			nb: 'Fiske'
+		},
+		caption: {
+			en: 'Fishing',
+			nb: 'Fiske'
+		},
+		description: {
+			en: 'Use this space to share what fishing means to you, where you enjoy it, or a memorable experience on the water.',
+			nb: 'Bruk denne plassen til å fortelle hva fiske betyr for deg, hvor du liker å fiske, eller om en minneverdig opplevelse på vannet.'
+		}
+	},
+	{
+		id: 'cooking',
+		title: {
+			en: 'Cooking',
+			nb: 'Matlaging'
+		},
+		caption: {
+			en: 'Cooking',
+			nb: 'Matlaging'
+		},
+		description: {
+			en: 'Use this space to describe what you like to cook, the traditions you return to, or how you enjoy bringing people together around food.',
+			nb: 'Bruk denne plassen til å beskrive hva du liker å lage, tradisjonene du vender tilbake til, eller hvordan du samler mennesker rundt mat.'
+		}
+	},
+	{
+		id: 'interest-three',
+		title: {
+			en: 'Interest three',
+			nb: 'Interesse tre'
+		},
+		caption: {
+			en: 'Interest three',
+			nb: 'Interesse tre'
+		},
+		description: {
+			en: 'Replace this placeholder with another interest and a short, personal note about why it matters to you.',
+			nb: 'Bytt ut denne plassholderen med en annen interesse og en kort, personlig tekst om hvorfor den betyr noe for deg.'
+		}
 	}
 ];

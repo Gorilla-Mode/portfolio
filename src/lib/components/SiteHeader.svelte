@@ -16,6 +16,7 @@
 		<nav aria-label={copy.mainNavigation}>
 			<a href={resolve('/#about')}>{copy.about}</a>
 			<a href={resolve('/#projects')}>{copy.projects}</a>
+			<a href={resolve('/#interests')}>{copy.interests}</a>
 		</nav>
 		<LanguageButton />
 	</div>
@@ -27,8 +28,8 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: var(--space-5);
-		min-height: 6.5rem;
-		padding-block: var(--space-5);
+		min-height: var(--header-min-height);
+		padding-block: var(--header-padding);
 		border-bottom: 1px solid var(--color-border);
 	}
 
@@ -80,7 +81,6 @@
 	@media (max-width: 30rem) {
 		header {
 			gap: var(--space-2);
-			min-height: 5.5rem;
 		}
 
 		.identity {

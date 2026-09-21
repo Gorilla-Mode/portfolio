@@ -74,7 +74,7 @@
 
 <style>
 	.project-detail {
-		padding-bottom: var(--space-9);
+		padding-bottom: var(--section-padding-end);
 	}
 
 	.top-row {
@@ -82,8 +82,8 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: var(--space-4);
-		min-height: 6.5rem;
-		padding-block: var(--space-5);
+		min-height: var(--header-min-height);
+		padding-block: var(--header-padding);
 	}
 
 	.back-link {
@@ -103,7 +103,7 @@
 
 	.project-heading {
 		max-width: 48rem;
-		padding-block: var(--space-5) var(--space-7);
+		padding-block: var(--section-padding-start) var(--content-gap);
 	}
 
 	h1 {
@@ -114,7 +114,7 @@
 
 	.summary {
 		max-width: 42rem;
-		margin-top: var(--space-6);
+		margin-top: var(--text-gap);
 		font-size: clamp(1rem, 2vw, 1.25rem);
 		line-height: 1.7;
 		color: var(--color-text-muted);
@@ -153,9 +153,9 @@
 		display: grid;
 		grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr);
 		grid-template-rows: repeat(3, auto);
-		column-gap: var(--space-8);
-		row-gap: var(--space-4);
-		padding-top: var(--space-8);
+		column-gap: var(--content-gap);
+		row-gap: var(--text-gap);
+		padding-top: var(--content-gap);
 	}
 
 	.project-body > section,
@@ -163,7 +163,7 @@
 		display: grid;
 		grid-template-rows: subgrid;
 		grid-row: 1 / span 3;
-		row-gap: var(--space-4);
+		row-gap: var(--text-gap);
 	}
 
 	.project-body > section {
@@ -195,7 +195,7 @@
 	}
 
 	.remaining-description .detail-paragraph + .detail-paragraph {
-		margin-top: var(--space-5);
+		margin-top: var(--text-gap);
 	}
 
 	.metadata-middle {
@@ -259,7 +259,7 @@
 		.project-body {
 			grid-template-columns: minmax(0, 1fr);
 			grid-template-rows: auto;
-			gap: var(--space-7);
+			gap: var(--content-gap);
 		}
 
 		.project-body > section,
@@ -271,11 +271,11 @@
 
 		.first-description,
 		.remaining-description {
-			margin-top: var(--space-5);
+			margin-top: var(--text-gap);
 		}
 
 		.project-body aside > h2 {
-			margin-bottom: var(--space-4);
+			margin-bottom: var(--text-gap);
 		}
 
 		.metadata-middle {
@@ -283,17 +283,11 @@
 		}
 
 		.metadata-middle h2 {
-			margin-top: var(--space-7);
+			margin-top: var(--content-gap);
 		}
 
 		.links-list {
-			margin-top: var(--space-4);
-		}
-	}
-
-	@media (max-width: 30rem) {
-		.top-row {
-			min-height: 5.5rem;
+			margin-top: var(--text-gap);
 		}
 	}
 </style>

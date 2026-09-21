@@ -39,7 +39,7 @@
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-		padding: clamp(1.5rem, 3vw, 2rem);
+		padding: var(--card-padding);
 		text-decoration: none;
 	}
 
@@ -73,8 +73,8 @@
 	}
 
 	.description {
-		margin-top: var(--space-4);
-		margin-bottom: var(--space-6);
+		margin-top: var(--text-gap);
+		margin-bottom: var(--content-gap);
 		font-size: 0.875rem;
 		line-height: 1.8;
 		color: var(--color-text-muted);

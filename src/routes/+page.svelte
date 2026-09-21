@@ -1,8 +1,16 @@
 <script lang="ts">
 	import AboutSection from '$lib/components/AboutSection.svelte';
+	import InterestsSection from '$lib/components/InterestsSection.svelte';
 	import ProjectsSection from '$lib/components/ProjectsSection.svelte';
 	import SiteHeader from '$lib/components/SiteHeader.svelte';
-	import { localizeProfile, localizeProject, profile, projects } from '$lib/content';
+	import {
+		interests,
+		localizeInterest,
+		localizeProfile,
+		localizeProject,
+		profile,
+		projects
+	} from '$lib/content';
 	import { getLocaleContext, ui } from '$lib/i18n';
 
 	const language = getLocaleContext();
@@ -10,6 +18,9 @@
 	let localizedProfile = $derived(localizeProfile(language.locale));
 	let localizedProjects = $derived(
 		projects.map((project) => localizeProject(project, language.locale))
+	);
+	let localizedInterests = $derived(
+		interests.map((interest) => localizeInterest(interest, language.locale))
 	);
 </script>
 
@@ -22,8 +33,15 @@
 <SiteHeader name={profile.name} {copy} />
 
 <main id="main-content" class="container" tabindex="-1">
-	<AboutSection {...localizedProfile} exploreProjects={copy.exploreProjects} />
+	<AboutSection
+		{...localizedProfile}
+		exploreProjects={copy.exploreProjects}
+		profileImagePlaceholder={copy.profileImagePlaceholder}
+		githubPlaceholder={copy.githubPlaceholder}
+		linkedinPlaceholder={copy.linkedinPlaceholder}
+	/>
 	<ProjectsSection projects={localizedProjects} {copy} />
+	<InterestsSection interests={localizedInterests} {copy} />
 </main>
 
 <footer class="container">
@@ -37,7 +55,7 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: var(--space-5);
-		padding-block: var(--space-5) var(--space-7);
+		padding-block: var(--space-5);
 		border-top: 1px solid var(--color-border);
 		font-size: 0.75rem;
 		color: var(--color-text-muted);
