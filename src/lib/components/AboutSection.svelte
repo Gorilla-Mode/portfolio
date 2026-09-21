@@ -1,5 +1,10 @@
 <script lang="ts">
-	let { name, role, bio }: { name: string; role: string; bio: string } = $props();
+	let {
+		name,
+		role,
+		bio,
+		exploreProjects
+	}: { name: string; role: string; bio: string; exploreProjects: string } = $props();
 </script>
 
 <section id="about" aria-labelledby="about-heading">
@@ -7,7 +12,7 @@
 	<p class="role">{role}</p>
 	<p class="bio">{bio}</p>
 	<a class="projects-link" href="#projects">
-		Explore projects
+		{exploreProjects}
 		<span aria-hidden="true">↓</span>
 	</a>
 </section>
@@ -60,7 +65,7 @@
 		color: var(--color-text-muted);
 	}
 
-	a:hover{
+	a:hover {
 		color: var(--color-text);
 	}
 </style>
