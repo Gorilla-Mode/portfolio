@@ -65,6 +65,10 @@ Example with exact dimensions:
   below, that portrait moves beneath the text and is centered. Portraits are native-button controls
   with visible focus, pressed state, and polite selection announcements. The selected state uses
   existing text and border colors and does not animate.
+- **Background:** The dither shader is fixed to the visible viewport and fills its `100dvw` by
+  `100dvh` wrapper at every screen size. Its canvas resizes with the viewport while the existing
+  shader appearance, animation, and render budget remain unchanged; it does not grow with the
+  scrollable document.
 - **Interaction:** Native section links, dotted underlines on hovered links by default, visible keyboard focus, and a
   skip link. The entire project card links to its detail page. Smooth scrolling only when reduced
   motion is not requested. No decorative animations.
