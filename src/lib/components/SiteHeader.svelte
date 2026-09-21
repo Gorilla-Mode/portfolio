@@ -16,6 +16,7 @@
 		<nav aria-label={copy.mainNavigation}>
 			<a href={resolve('/#about')}>{copy.about}</a>
 			<a href={resolve('/#projects')}>{copy.projects}</a>
+			<a href={resolve('/#interests')}>{copy.interests}</a>
 		</nav>
 		<LanguageButton />
 	</div>
