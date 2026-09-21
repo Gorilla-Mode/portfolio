@@ -26,8 +26,8 @@
 
 <div class="background" aria-hidden="true">
 	<Dithering
-		width={2560}
-		height={1440}
+		width="100%"
+		height="100%"
 		colorBack="#121212"
 		colorFront="#341313"
 		shape="warp"
