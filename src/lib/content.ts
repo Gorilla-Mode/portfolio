@@ -208,6 +208,30 @@ export const interests: Interest[] = [
 		description: {
 			en: 'Use this space to share what fishing means to you, where you enjoy it, or a memorable experience on the water.',
 			nb: 'Bruk denne plassen til å fortelle hva fiske betyr for deg, hvor du liker å fiske, eller om en minneverdig opplevelse på vannet.'
+		},
+		image: {
+			src: '/img/interests/IMG_4693.png',
+			alt: {
+				en: 'Fishing',
+				nb: 'Fiske'
+			},
+			framing: {
+				x: 25,
+				y: 50,
+				scale: 1.0
+			}
+		},
+		detailImage: {
+			src: '/img/interests/IMG_4694.png',
+			alt: {
+				en: 'Fishing',
+				nb: 'Fiske'
+			},
+			framing: {
+				x: 50,
+				y: 50,
+				scale: 1.0
+			}
 		}
 	},
 	{
@@ -223,6 +247,30 @@ export const interests: Interest[] = [
 		description: {
 			en: 'Use this space to describe what you like to cook, the traditions you return to, or how you enjoy bringing people together around food.',
 			nb: 'Bruk denne plassen til å beskrive hva du liker å lage, tradisjonene du vender tilbake til, eller hvordan du samler mennesker rundt mat.'
+		},
+		image: {
+			src: '/img/interests/Cooking_2.jpg',
+			alt: {
+				en: 'Cooking',
+				nb: 'Matlaging'
+			},
+			framing: {
+				x: 40,
+				y: 50,
+				scale: 1.0
+			}
+		},
+		detailImage: {
+			src: '/img/interests/cooking_1.jpg',
+			alt: {
+				en: 'Cooking',
+				nb: 'Matlaging'
+			},
+			framing: {
+				x: 50,
+				y: 50,
+				scale: 1.0
+			}
 		}
 	},
 	{
