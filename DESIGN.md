@@ -29,8 +29,9 @@ Large typography, compact and consistent spacing, thin borders, and square shape
   out). Scaling applies to the complete source image before the Gothic frame crops it, so zooming out
   reveals more of the source first and exposes the frame's surface color only after reaching a source
   edge. Each field is optional. Missing or invalid values use `x: 50`, `y: 50`, and `scale: 1`, while
-  out-of-range focal points are constrained to the frame. The frame geometry remains server-stable;
-  non-default image framing settles after the image's intrinsic dimensions are available.
+  out-of-range focal points are constrained to the frame. Images appear without animation only once
+  their intrinsic dimensions and the frame dimensions are available and their final framing is applied.
+  The frame geometry, outline, and surface background remain stable while images load or if they fail.
 
 Example portrait framing:
 
@@ -84,7 +85,8 @@ Example with exact dimensions:
   `50dvh` tall at 640px and below. A caption always identifies each interest. Selecting a portrait
   updates one shared article below the row; the first entry is selected initially. Unselected selector
   images use a static, monochrome 4x4 ordered dither with the same resolved framing as the full-color
-  selected image, so selection does not change the crop. Placeholders and the separate detail portrait
+  selected image, so selection does not change the crop. Initialized dither layers stay mounted and
+  toggle visibility when selection changes. Placeholders and the separate detail portrait
   are not dithered. The article places its title and drop-cap description beside a separate,
   default-size rounded portrait. At 640px and below, that portrait moves beneath the text and is
   centered. Portraits are native-button controls with visible focus, pressed state, and polite
