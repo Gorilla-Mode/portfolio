@@ -46,16 +46,18 @@ export const profile: Profile = {
 		en: 'A few words about you, what you do, and what you care about. Keep it short, make it personal, and let your work tell the rest of the story.',
 		nb: 'Noen ord om deg, hva du gjør, og hva som er viktig for deg. Hold det kort og personlig, og la arbeidet ditt fortelle resten av historien.'
 	},
+	github: 'https://github.com/Gorilla-Mode',
+	linkedin: 'https://www.linkedin.com/in/tobias-olsen-nodland-44b03a3a0/',
 	image: {
-		src: 'path/to/your/image.jpg',
+		src: '/img/other/Image 28_g2p0032_02.jpg',
 		alt: {
 			en: 'Your image description in English',
 			nb: 'Din bildebeskrivelse i norsk'
 		},
 		framing: {
-			x: 0.5,
-			y: 0.5,
-			scale: 1.0
+			x: 50,
+			y: 50,
+			scale: 1
 		}
 	}
 };
