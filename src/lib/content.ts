@@ -224,7 +224,7 @@ export const interests: Interest[] = [
 			nb: 'Bruk denne plassen til å fortelle hva fiske betyr for deg, hvor du liker å fiske, eller om en minneverdig opplevelse på vannet.'
 		},
 		image: {
-			src: '/img/interests/IMG_4693.png',
+			src: '/img/interests/river_monster_1.jpg',
 			alt: {
 				en: 'Fishing',
 				nb: 'Fiske'
@@ -236,7 +236,7 @@ export const interests: Interest[] = [
 			}
 		},
 		detailImage: {
-			src: '/img/interests/IMG_4694.png',
+			src: '/img/interests/huge_fish_1.jpg',
 			alt: {
 				en: 'Fishing',
 				nb: 'Fiske'
