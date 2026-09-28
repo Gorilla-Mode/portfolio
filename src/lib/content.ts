@@ -45,6 +45,18 @@ export const profile: Profile = {
 	bio: {
 		en: 'A few words about you, what you do, and what you care about. Keep it short, make it personal, and let your work tell the rest of the story.',
 		nb: 'Noen ord om deg, hva du gjør, og hva som er viktig for deg. Hold det kort og personlig, og la arbeidet ditt fortelle resten av historien.'
+	},
+	image: {
+		src: 'path/to/your/image.jpg',
+		alt: {
+			en: 'Your image description in English',
+			nb: 'Din bildebeskrivelse i norsk'
+		},
+		framing: {
+			x: 0.5,
+			y: 0.5,
+			scale: 1.0
+		}
 	}
 };
 
