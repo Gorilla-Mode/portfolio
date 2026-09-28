@@ -49,7 +49,9 @@
 	let intrinsicWidth = $state(0);
 	let intrinsicHeight = $state(0);
 	let measuredSource = $state<string>();
+	let measuredElement = $state<HTMLImageElement>();
 	let ditherPalette = $state<DitherPalette>();
+	let ditherInitialized = $state(false);
 	let framing = $derived(resolveFraming(image?.framing));
 	let focalPoint = $derived(`${framing.x}% ${framing.y}%`);
 	let ditherOffsetX = $derived((1 - framing.scale) * (framing.x / 100 - 0.5));
@@ -58,6 +60,7 @@
 		if (
 			!image ||
 			measuredSource !== image.src ||
+			measuredElement !== imageElement ||
 			frameWidth <= 0 ||
 			frameHeight <= 0 ||
 			intrinsicWidth <= 0 ||
@@ -79,16 +82,34 @@
 	});
 
 	function measureImage(element: HTMLImageElement): void {
-		if (!element.complete || element.naturalWidth <= 0 || element.naturalHeight <= 0) return;
+		if (
+			element !== imageElement ||
+			element.getAttribute('src') !== image?.src ||
+			!element.complete ||
+			element.naturalWidth <= 0 ||
+			element.naturalHeight <= 0
+		)
+			return;
 
 		intrinsicWidth = element.naturalWidth;
 		intrinsicHeight = element.naturalHeight;
 		measuredSource = element.getAttribute('src') ?? undefined;
+		measuredElement = element;
 	}
 
 	function handleImageLoad(event: Event): void {
 		measureImage(event.currentTarget as HTMLImageElement);
 	}
+
+	$effect(() => {
+		// A cached image may finish before its load handler is attached.
+		if (imageElement) measureImage(imageElement);
+	});
+
+	$effect(() => {
+		// Keep an initialized shader mounted when its portrait is selected.
+		if (dithered) ditherInitialized = true;
+	});
 
 	onMount(() => {
 		const rootStyles = getComputedStyle(document.documentElement);
@@ -107,8 +128,6 @@
 		observer.observe(mediaElement);
 		measureFrame();
 
-		if (imageElement) measureImage(imageElement);
-
 		return () => observer.disconnect();
 	});
 </script>
@@ -122,42 +141,44 @@
 >
 	<div class="media" bind:this={mediaElement}>
 		{#if image}
-			<img
-				bind:this={imageElement}
-				class:positioned={positionedImage !== undefined}
-				src={image.src}
-				alt={image.alt}
-				style:object-position={focalPoint}
-				style:width={positionedImage ? `${positionedImage.width}px` : undefined}
-				style:height={positionedImage ? `${positionedImage.height}px` : undefined}
-				style:left={positionedImage ? `${positionedImage.left}px` : undefined}
-				style:top={positionedImage ? `${positionedImage.top}px` : undefined}
-				onload={handleImageLoad}
-			/>
-
-			{#if dithered && ditherPalette}
-				<ImageDithering
-					class="portrait-dither"
-					width="100%"
-					height="100%"
-					image={image.src}
-					colorBack={ditherPalette.back}
-					colorFront={ditherPalette.front}
-					colorHighlight={ditherPalette.front}
-					originalColors={false}
-					type="4x4"
-					size={1.5}
-					colorSteps={3}
-					scale={framing.scale}
-					originX={framing.x / 100}
-					originY={framing.y / 100}
-					offsetX={ditherOffsetX}
-					offsetY={ditherOffsetY}
-					fit="cover"
-					aria-hidden="true"
-
+			{#key image.src}
+				<img
+					bind:this={imageElement}
+					class:positioned={positionedImage !== undefined}
+					src={image.src}
+					alt={image.alt}
+					style:object-position={focalPoint}
+					style:width={positionedImage ? `${positionedImage.width}px` : undefined}
+					style:height={positionedImage ? `${positionedImage.height}px` : undefined}
+					style:left={positionedImage ? `${positionedImage.left}px` : undefined}
+					style:top={positionedImage ? `${positionedImage.top}px` : undefined}
+					onload={handleImageLoad}
 				/>
-			{/if}
+
+				{#if ditherInitialized && ditherPalette}
+					<ImageDithering
+						class="portrait-dither"
+						style={`visibility: ${dithered && positionedImage ? 'visible' : 'hidden'}`}
+						width="100%"
+						height="100%"
+						image={image.src}
+						colorBack={ditherPalette.back}
+						colorFront={ditherPalette.front}
+						colorHighlight={ditherPalette.front}
+						originalColors={false}
+						type="4x4"
+						size={1.5}
+						colorSteps={3}
+						scale={framing.scale}
+						originX={framing.x / 100}
+						originY={framing.y / 100}
+						offsetX={ditherOffsetX}
+						offsetY={ditherOffsetY}
+						fit="cover"
+						aria-hidden="true"
+					/>
+				{/if}
+			{/key}
 		{:else}
 			<p>{placeholder}</p>
 		{/if}
@@ -230,11 +251,13 @@
 	.media img {
 		display: block;
 		object-fit: cover;
+		visibility: hidden;
 	}
 
 	.media img.positioned {
 		position: absolute;
 		max-width: none;
+		visibility: visible;
 	}
 
 	.portrait-image.dithered .media img {
