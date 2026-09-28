@@ -49,7 +49,7 @@ export const profile: Profile = {
 	github: 'https://github.com/Gorilla-Mode',
 	linkedin: 'https://www.linkedin.com/in/tobias-olsen-nodland-44b03a3a0/',
 	image: {
-		src: '/img/other/Image 28_g2p0032_02.jpg',
+		src: '/img/other/me.jpg',
 		alt: {
 			en: 'Your image description in English',
 			nb: 'Din bildebeskrivelse i norsk'
