@@ -2,22 +2,37 @@ import type { Locale } from './i18n';
 
 type Localized<T> = Record<Locale, T>;
 
+export type PortraitFraming = {
+	x?: number;
+	y?: number;
+	scale?: number;
+};
+
+export type PortraitContentImage = {
+	src: string;
+	alt: Localized<string>;
+	framing?: PortraitFraming;
+};
+
+export type LocalizedPortraitImage = {
+	src: string;
+	alt: string;
+	framing?: PortraitFraming;
+};
+
 export type Profile = {
 	name: string;
 	role: Localized<string>;
 	bio: Localized<string>;
 	github?: `https://${string}` | `http://${string}`;
 	linkedin?: `https://${string}` | `http://${string}`;
-	image?: {
-		src: string;
-		alt: Localized<string>;
-	};
+	image?: PortraitContentImage;
 };
 
 export type LocalizedProfile = Omit<Profile, 'role' | 'bio' | 'image'> & {
 	role: string;
 	bio: string;
-	image?: { src: string; alt: string };
+	image?: LocalizedPortraitImage;
 };
 
 // Replace these placeholders with your own name, introduction, and projects.
@@ -30,6 +45,20 @@ export const profile: Profile = {
 	bio: {
 		en: 'A few words about you, what you do, and what you care about. Keep it short, make it personal, and let your work tell the rest of the story.',
 		nb: 'Noen ord om deg, hva du gjør, og hva som er viktig for deg. Hold det kort og personlig, og la arbeidet ditt fortelle resten av historien.'
+	},
+	github: 'https://github.com/Gorilla-Mode',
+	linkedin: 'https://www.linkedin.com/in/tobias-olsen-nodland-44b03a3a0/',
+	image: {
+		src: '/img/other/Image 28_g2p0032_02.jpg',
+		alt: {
+			en: 'Your image description in English',
+			nb: 'Din bildebeskrivelse i norsk'
+		},
+		framing: {
+			x: 50,
+			y: 50,
+			scale: 1
+		}
 	}
 };
 
@@ -58,14 +87,8 @@ export type Interest = {
 	title: Localized<string>;
 	caption: Localized<string>;
 	description: Localized<string>;
-	image?: {
-		src: string;
-		alt: Localized<string>;
-	};
-	detailImage?: {
-		src: string;
-		alt: Localized<string>;
-	};
+	image?: PortraitContentImage;
+	detailImage?: PortraitContentImage;
 };
 
 export type LocalizedInterest = Omit<
@@ -75,8 +98,8 @@ export type LocalizedInterest = Omit<
 	title: string;
 	caption: string;
 	description: string;
-	image?: { src: string; alt: string };
-	detailImage?: { src: string; alt: string };
+	image?: LocalizedPortraitImage;
+	detailImage?: LocalizedPortraitImage;
 };
 
 export function localizeProfile(locale: Locale): LocalizedProfile {
@@ -86,7 +109,11 @@ export function localizeProfile(locale: Locale): LocalizedProfile {
 		bio: profile.bio[locale],
 		github: profile.github,
 		linkedin: profile.linkedin,
-		image: profile.image && { src: profile.image.src, alt: profile.image.alt[locale] }
+		image: profile.image && {
+			src: profile.image.src,
+			alt: profile.image.alt[locale],
+			framing: profile.image.framing
+		}
 	};
 }
 
@@ -105,10 +132,15 @@ export function localizeInterest(interest: Interest, locale: Locale): LocalizedI
 		title: interest.title[locale],
 		caption: interest.caption[locale],
 		description: interest.description[locale],
-		image: interest.image && { src: interest.image.src, alt: interest.image.alt[locale] },
+		image: interest.image && {
+			src: interest.image.src,
+			alt: interest.image.alt[locale],
+			framing: interest.image.framing
+		},
 		detailImage: interest.detailImage && {
 			src: interest.detailImage.src,
-			alt: interest.detailImage.alt[locale]
+			alt: interest.detailImage.alt[locale],
+			framing: interest.detailImage.framing
 		}
 	};
 }
@@ -190,6 +222,30 @@ export const interests: Interest[] = [
 		description: {
 			en: 'Use this space to share what fishing means to you, where you enjoy it, or a memorable experience on the water.',
 			nb: 'Bruk denne plassen til å fortelle hva fiske betyr for deg, hvor du liker å fiske, eller om en minneverdig opplevelse på vannet.'
+		},
+		image: {
+			src: '/img/interests/IMG_4693.png',
+			alt: {
+				en: 'Fishing',
+				nb: 'Fiske'
+			},
+			framing: {
+				x: 25,
+				y: 50,
+				scale: 1.0
+			}
+		},
+		detailImage: {
+			src: '/img/interests/IMG_4694.png',
+			alt: {
+				en: 'Fishing',
+				nb: 'Fiske'
+			},
+			framing: {
+				x: 50,
+				y: 50,
+				scale: 1.0
+			}
 		}
 	},
 	{
@@ -205,21 +261,69 @@ export const interests: Interest[] = [
 		description: {
 			en: 'Use this space to describe what you like to cook, the traditions you return to, or how you enjoy bringing people together around food.',
 			nb: 'Bruk denne plassen til å beskrive hva du liker å lage, tradisjonene du vender tilbake til, eller hvordan du samler mennesker rundt mat.'
+		},
+		image: {
+			src: '/img/interests/Cooking_2.jpg',
+			alt: {
+				en: 'Cooking',
+				nb: 'Matlaging'
+			},
+			framing: {
+				x: 40,
+				y: 50,
+				scale: 1.0
+			}
+		},
+		detailImage: {
+			src: '/img/interests/cooking_1.jpg',
+			alt: {
+				en: 'Cooking',
+				nb: 'Matlaging'
+			},
+			framing: {
+				x: 50,
+				y: 50,
+				scale: 1.0
+			}
 		}
 	},
 	{
-		id: 'interest-three',
+		id: 'Photography',
 		title: {
-			en: 'Interest three',
-			nb: 'Interesse tre'
+			en: 'Photography',
+			nb: 'Fotografi'
 		},
 		caption: {
-			en: 'Interest three',
-			nb: 'Interesse tre'
+			en: 'Photography',
+			nb: 'Fotografi'
 		},
 		description: {
 			en: 'Replace this placeholder with another interest and a short, personal note about why it matters to you.',
 			nb: 'Bytt ut denne plassholderen med en annen interesse og en kort, personlig tekst om hvorfor den betyr noe for deg.'
+		},
+		image: {
+			src: '/img/interests/photography_2.jpg',
+			alt: {
+				en: 'Photography',
+				nb: 'Fotografi'
+			},
+			framing: {
+				x: 30,
+				y: 50,
+				scale: 1.2
+			}
+		},
+		detailImage: {
+			src: '/img/interests/photography_1.jpg',
+			alt: {
+				en: 'Photography',
+				nb: 'Fotografi'
+			},
+			framing: {
+				x: 55,
+				y: 50,
+				scale: 1.0
+			}
 		}
 	}
 ];

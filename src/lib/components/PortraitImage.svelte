@@ -1,26 +1,163 @@
 <script lang="ts">
-	type Portrait = { src: string; alt: string };
+	import { ImageDithering } from '@devmischief/shaders-svelte';
+	import { onMount } from 'svelte';
+	import type { PortraitFraming } from '$lib/content';
+
+	type Portrait = { src: string; alt: string; framing?: PortraitFraming };
 	type Shape = 'rounded' | 'pointed';
+	type ResolvedFraming = Required<PortraitFraming>;
+	type PositionedImage = {
+		width: number;
+		height: number;
+		left: number;
+		top: number;
+	};
+	type DitherPalette = { back: string; front: string };
+
+	function numberOr(value: number | undefined, fallback: number): number {
+		return typeof value === 'number' && Number.isFinite(value) ? value : fallback;
+	}
+
+	function resolveFraming(framing?: PortraitFraming): ResolvedFraming {
+		const x = Math.min(100, Math.max(0, numberOr(framing?.x, 50)));
+		const y = Math.min(100, Math.max(0, numberOr(framing?.y, 50)));
+		const scale = numberOr(framing?.scale, 1);
+
+		return { x, y, scale: scale > 0 ? scale : 1 };
+	}
 
 	let {
 		image,
 		placeholder,
 		shape = 'rounded',
+		dithered = false,
 		width,
 		height
 	}: {
 		image?: Portrait;
 		placeholder: string;
 		shape?: Shape;
+		dithered?: boolean;
 		width?: string;
 		height?: string;
 	} = $props();
+
+	let mediaElement: HTMLDivElement;
+	let imageElement = $state<HTMLImageElement>();
+	let frameWidth = $state(0);
+	let frameHeight = $state(0);
+	let intrinsicWidth = $state(0);
+	let intrinsicHeight = $state(0);
+	let measuredSource = $state<string>();
+	let ditherPalette = $state<DitherPalette>();
+	let framing = $derived(resolveFraming(image?.framing));
+	let focalPoint = $derived(`${framing.x}% ${framing.y}%`);
+	let ditherOffsetX = $derived((1 - framing.scale) * (framing.x / 100 - 0.5));
+	let ditherOffsetY = $derived((1 - framing.scale) * (framing.y / 100 - 0.5));
+	let positionedImage = $derived.by((): PositionedImage | undefined => {
+		if (
+			!image ||
+			measuredSource !== image.src ||
+			frameWidth <= 0 ||
+			frameHeight <= 0 ||
+			intrinsicWidth <= 0 ||
+			intrinsicHeight <= 0
+		) {
+			return undefined;
+		}
+
+		const coverScale = Math.max(frameWidth / intrinsicWidth, frameHeight / intrinsicHeight);
+		const width = intrinsicWidth * coverScale * framing.scale;
+		const height = intrinsicHeight * coverScale * framing.scale;
+
+		return {
+			width,
+			height,
+			left: ((frameWidth - width) * framing.x) / 100,
+			top: ((frameHeight - height) * framing.y) / 100
+		};
+	});
+
+	function measureImage(element: HTMLImageElement): void {
+		if (!element.complete || element.naturalWidth <= 0 || element.naturalHeight <= 0) return;
+
+		intrinsicWidth = element.naturalWidth;
+		intrinsicHeight = element.naturalHeight;
+		measuredSource = element.getAttribute('src') ?? undefined;
+	}
+
+	function handleImageLoad(event: Event): void {
+		measureImage(event.currentTarget as HTMLImageElement);
+	}
+
+	onMount(() => {
+		const rootStyles = getComputedStyle(document.documentElement);
+		const back = rootStyles.getPropertyValue('--color-background').trim();
+		const front = rootStyles.getPropertyValue('--color-dither-bright').trim();
+
+		if (back && front) ditherPalette = { back, front };
+
+		const measureFrame = () => {
+			const bounds = mediaElement.getBoundingClientRect();
+			frameWidth = bounds.width;
+			frameHeight = bounds.height;
+		};
+
+		const observer = new ResizeObserver(measureFrame);
+		observer.observe(mediaElement);
+		measureFrame();
+
+		if (imageElement) measureImage(imageElement);
+
+		return () => observer.disconnect();
+	});
 </script>
 
-<figure class:pointed={shape === 'pointed'} class="portrait-image" style:width style:height>
-	<div class="media">
+<figure
+	class:pointed={shape === 'pointed'}
+	class:dithered
+	class="portrait-image"
+	style:width
+	style:height
+>
+	<div class="media" bind:this={mediaElement}>
 		{#if image}
-			<img src={image.src} alt={image.alt} />
+			<img
+				bind:this={imageElement}
+				class:positioned={positionedImage !== undefined}
+				src={image.src}
+				alt={image.alt}
+				style:object-position={focalPoint}
+				style:width={positionedImage ? `${positionedImage.width}px` : undefined}
+				style:height={positionedImage ? `${positionedImage.height}px` : undefined}
+				style:left={positionedImage ? `${positionedImage.left}px` : undefined}
+				style:top={positionedImage ? `${positionedImage.top}px` : undefined}
+				onload={handleImageLoad}
+			/>
+
+			{#if dithered && ditherPalette}
+				<ImageDithering
+					class="portrait-dither"
+					width="100%"
+					height="100%"
+					image={image.src}
+					colorBack={ditherPalette.back}
+					colorFront={ditherPalette.front}
+					colorHighlight={ditherPalette.front}
+					originalColors={false}
+					type="4x4"
+					size={1.5}
+					colorSteps={3}
+					scale={framing.scale}
+					originX={framing.x / 100}
+					originY={framing.y / 100}
+					offsetX={ditherOffsetX}
+					offsetY={ditherOffsetY}
+					fit="cover"
+					aria-hidden="true"
+
+				/>
+			{/if}
 		{:else}
 			<p>{placeholder}</p>
 		{/if}
@@ -70,6 +207,7 @@
 	.media {
 		position: absolute;
 		inset: 0;
+		overflow: hidden;
 		background: var(--color-surface);
 		-webkit-mask-image: var(--arch-mask), linear-gradient(#000 0 0);
 		mask-image: var(--arch-mask), linear-gradient(#000 0 0);
@@ -92,6 +230,23 @@
 	.media img {
 		display: block;
 		object-fit: cover;
+	}
+
+	.media img.positioned {
+		position: absolute;
+		max-width: none;
+	}
+
+	.portrait-image.dithered .media img {
+		filter: grayscale(1);
+	}
+
+	.media :global(.portrait-dither) {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
 	}
 
 	.media p {
