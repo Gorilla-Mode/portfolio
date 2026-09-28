@@ -37,10 +37,10 @@ export type LocalizedProfile = Omit<Profile, 'role' | 'bio' | 'image'> & {
 
 // Replace these placeholders with your own name, introduction, and projects.
 export const profile: Profile = {
-	name: 'Your name',
+	name: 'Tobias Olsen Nodland',
 	role: {
-		en: 'Your role / specialty',
-		nb: 'Din rolle / ditt fagområde'
+		en: 'Backend Developer',
+		nb: 'Backend utvikler'
 	},
 	bio: {
 		en: 'A few words about you, what you do, and what you care about. Keep it short, make it personal, and let your work tell the rest of the story.',
@@ -149,13 +149,14 @@ export function localizeInterest(interest: Interest, locale: Locale): LocalizedI
 // Add href, github, and image when you have real destinations and an image file.
 export const projects: Project[] = [
 	{
-		id: 'project-one',
-		title: 'Project one',
+		id: 'NRL',
+		title: 'NRL Obstacle Reporting',
 		description: {
-			en: 'A short overview of something you built. Describe the idea, the problem it solves, and what makes it yours.',
-			nb: 'En kort oversikt over noe du har laget. Beskriv ideen, problemet det løser, og hva som gjør det til ditt.'
+			en: '3. Semester project where we as a group developed a system, in partnership with the Norwegian Mapping Auhority and Air-Ambulance, for in-flight reporting of obstacles',
+			nb: '3. Semesterprosjekt hvor vi som gruppe utviklet et system, i samarbeid med Karverket og Norsk Luftambulasne, for rapporering av luftfartshindre under flygning'
 		},
 		longDescription: {
+			//TODO
 			en: [
 				'Use this space to explain the problem behind the project and why you chose to work on it. Give readers enough context to understand who it was for and what success looked like.',
 				'Describe your approach, the decisions you made, and the part you built yourself. Close with the result or what you learned from the work.'
@@ -165,16 +166,18 @@ export const projects: Project[] = [
 				'Beskriv fremgangsmåten din, valgene du tok, og det du bygde selv. Avslutt med resultatet eller det du lærte av arbeidet.'
 			]
 		},
-		technologies: ['Svelte', 'TypeScript', 'CSS']
+		technologies: ['C#', 'MVC', 'mySQL', 'Docker'],
+		github: 'https://github.com/Gorilla-Mode/NRL-Obstacle-Reporting'
 	},
 	{
-		id: 'project-two',
-		title: 'Project two',
+		id: 'SWRPG',
+		title: 'SWRPG Inventory System',
 		description: {
-			en: 'A space for another piece of work. Share who it was made for and the part you played in bringing it to life.',
-			nb: 'Plass til et annet arbeid. Fortell hvem det ble laget for, og hvilken rolle du hadde i å gjøre det til virkelighet.'
+			en: 'A work in progress inventory manager for Star Wars RPG, using a inventory grid inspired by games like DayZ and EFT',
+			nb: 'Et inventar system for bruk i Star Wars RPG, med en "grid" inventar, inspirert av spill som DayZ og EFT. Fortsatt under utvikling'
 		},
 		longDescription: {
+			//TODO
 			en: [
 				'Introduce the people or use case behind this project. Explain the need it addressed and the constraints that shaped the work.',
 				'Walk through the most important implementation choices and your contribution. Add a concrete outcome, challenge, or lesson once this is a real project.'
@@ -184,16 +187,18 @@ export const projects: Project[] = [
 				'Gå gjennom de viktigste valgene i gjennomføringen og ditt eget bidrag. Legg til et konkret resultat, en utfordring eller en erfaring når dette er et virkelig prosjekt.'
 			]
 		},
-		technologies: ['TypeScript', 'Node.js']
+		technologies: ['Odin', 'Raylib'],
+		github: 'https://github.com/Gorilla-Mode/SWRPG-Inventory-System'
 	},
 	{
-		id: 'project-three',
-		title: 'Project three',
+		id: 'ROC',
+		title: 'Resonant Orbit Calculator',
 		description: {
-			en: 'An experiment, a side project, or an idea you explored. A few sentences about what you learned along the way.',
-			nb: 'Et eksperiment, et sideprosjekt eller en idé du utforsket. Noen setninger om det du lærte underveis.'
+			en: 'A TUI program used to calculate resonant orbits around a body. Specifically designed to be used with the game Kerbal Space Program, with a focus on building satellite clusters',
+			nb: 'Et TUI program for a kalkulere parameter til baner med baneresonans rundt et legeme. Laget spesielt for bruk med spillet Kerbal Space Program, med fokus på bygning av satellitnett'
 		},
 		longDescription: {
+			//TODO
 			en: [
 				'Explain the question or idea that started this experiment. What did you want to test, make, or understand?',
 				'Share how you explored it, what changed along the way, and what you would do next. Replace this text with the details that make the project distinctive.'
@@ -203,7 +208,79 @@ export const projects: Project[] = [
 				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
 			]
 		},
-		technologies: ['HTML', 'CSS', 'JavaScript']
+		github: 'https://github.com/Gorilla-Mode/ROC',
+		technologies: ['C', 'PDcurses'],
+		image: {
+			src: '/img/projects/roc.png',
+			alt: {
+				en: 'ROC',
+				nb: 'ROC'
+			}
+		}
+	},
+	{
+		id: 'GFP',
+		title: 'GeoFlatpack',
+		description: {
+			en: 'A program that converts GML datasets to flatGeobuffer format with a corresponding stylesheet for symbology',
+			nb: 'Et program som konverterer GML-datasett til flatGeobuffer-format med et generert, konfigurerbart stylesheet for symbologi.'
+		},
+		longDescription: {
+			//TODO
+			en: [
+				'Explain the question or idea that started this experiment. What did you want to test, make, or understand?',
+				'Share how you explored it, what changed along the way, and what you would do next. Replace this text with the details that make the project distinctive.'
+			],
+			nb: [
+				'Forklar spørsmålet eller ideen som startet eksperimentet. Hva ville du teste, lage eller forstå?',
+				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
+			]
+		},
+		technologies: ['Go', 'FlatGeobuf', 'GDAL'],
+		github: 'https://github.com/Gorilla-Mode/GeoFlatpack',
+		href: 'https://gorilla-mode.github.io/GeoFlatpack/'
+	},
+	{
+		id: 'GST',
+		title: 'GhosttyStatus',
+		description: {
+			en: 'A collection of software tools developed by Gorilla-Mode.',
+			nb: 'En samling av programvareverktøy utviklet av Gorilla-Mode.'
+		},
+		longDescription: {
+			//TODO
+			en: [
+				'Explain the question or idea that started this experiment. What did you want to test, make, or understand?',
+				'Share how you explored it, what changed along the way, and what you would do next. Replace this text with the details that make the project distinctive.'
+			],
+			nb: [
+				'Forklar spørsmålet eller ideen som startet eksperimentet. Hva ville du teste, lage eller forstå?',
+				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
+			]
+		},
+		technologies: ['C'],
+		github: 'https://github.com/Gorilla-Mode/GST'
+	},
+	{
+		id: '218',
+		title: 'GhosttyStatus',
+		description: {
+			en: 'A collection of software tools developed by Gorilla-Mode.',
+			nb: 'En samling av programvareverktøy utviklet av Gorilla-Mode.'
+		},
+		longDescription: {
+			//TODO
+			en: [
+				'Explain the question or idea that started this experiment. What did you want to test, make, or understand?',
+				'Share how you explored it, what changed along the way, and what you would do next. Replace this text with the details that make the project distinctive.'
+			],
+			nb: [
+				'Forklar spørsmålet eller ideen som startet eksperimentet. Hva ville du teste, lage eller forstå?',
+				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
+			]
+		},
+		technologies: ['C'],
+		github: 'https://github.com/Gorilla-Mode/GhosttyStatus'
 	}
 ];
 
