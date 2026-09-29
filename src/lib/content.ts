@@ -238,7 +238,14 @@ export const projects: Project[] = [
 		},
 		technologies: ['Go', 'FlatGeobuf', 'GDAL'],
 		github: 'https://github.com/Gorilla-Mode/GeoFlatpack',
-		href: 'https://gorilla-mode.github.io/GeoFlatpack/'
+		href: 'https://gorilla-mode.github.io/GeoFlatpack/',
+		image: {
+			src: '/img/projects/gfp_1.png',
+				alt: {
+					en: 'GeoFlatpack',
+					nb: 'GeoFlatpack'
+				}
+		}
 	},
 	{
 		id: 'GST',

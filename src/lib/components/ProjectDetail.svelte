@@ -130,16 +130,16 @@
 	.project-image img,
 	.project-image p {
 		width: 100%;
-		aspect-ratio: 16 / 9;
 	}
 
 	.project-image img {
 		display: block;
-		object-fit: cover;
+		height: auto;
 	}
 
 	.project-image p {
 		display: flex;
+		aspect-ratio: 16 / 9;
 		align-items: center;
 		justify-content: center;
 		padding: var(--space-5);

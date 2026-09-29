@@ -64,7 +64,9 @@ Example with exact dimensions:
   and later description paragraphs do not use drop caps.
 - **Layout:** A centered column up to 960px wide. Compact header and introduction, two-column
   project grid, and a small footer. Project detail pages use the same column, with a large image area
-  and a text-and-metadata layout. Detail pages start with an “All projects” back link instead of the
+  and a text-and-metadata layout. Project detail images fill the available width, with their height
+  following the source image's natural aspect ratio without cropping or distortion. Missing-image
+  placeholders retain a 16:9 frame. Detail pages start with an “All projects” back link instead of the
   site header. The detail page back-link row shares the homepage header's height, without its border.
   A language button sits at the far right of the homepage header and beside the detail page back
   link. It reads like a header link, with bright text and no box. On narrow screens, it stays right
