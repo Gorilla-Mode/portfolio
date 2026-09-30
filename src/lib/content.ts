@@ -241,18 +241,18 @@ export const projects: Project[] = [
 		href: 'https://gorilla-mode.github.io/GeoFlatpack/',
 		image: {
 			src: '/img/projects/gfp_1.png',
-				alt: {
-					en: 'GeoFlatpack',
-					nb: 'GeoFlatpack'
-				}
+			alt: {
+				en: 'GeoFlatpack',
+				nb: 'GeoFlatpack'
+			}
 		}
 	},
 	{
 		id: 'GST',
 		title: 'GhosttyStatus',
 		description: {
-			en: 'A collection of software tools developed by Gorilla-Mode.',
-			nb: 'En samling av programvareverktøy utviklet av Gorilla-Mode.'
+			en: 'A small WIP utility to display a status bar in the Ghostty terminal emulator',
+			nb: 'Et lite verktøy som viser en status-bar i terminal emulatoren Ghostty. Fortsatt under utvikling'
 		},
 		longDescription: {
 			//TODO
@@ -270,10 +270,10 @@ export const projects: Project[] = [
 	},
 	{
 		id: '218',
-		title: 'GhosttyStatus',
+		title: 'ShelterLog',
 		description: {
-			en: 'A collection of software tools developed by Gorilla-Mode.',
-			nb: 'En samling av programvareverktøy utviklet av Gorilla-Mode.'
+			en: '4. Semester project where we as a group developed a system to route to shelters and supplies in the event of an emergency',
+			nb: 'Et 4. semester prosjekt hvor vi som en gruppe utviklet et system for å rute til tilfluktsrom og forsyninger i en nødsituasjon'
 		},
 		longDescription: {
 			//TODO
@@ -286,8 +286,8 @@ export const projects: Project[] = [
 				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
 			]
 		},
-		technologies: ['C'],
-		github: 'https://github.com/Gorilla-Mode/GhosttyStatus'
+		technologies: ['Python', 'TypeScript', 'Postres', 'PostGIS'],
+		github: 'https://github.com/sivert-svanes/IS-218-Prosjekt'
 	}
 ];
 
