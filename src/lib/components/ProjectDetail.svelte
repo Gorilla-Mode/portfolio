@@ -3,6 +3,7 @@
 	import type { LocalizedProject } from '$lib/content';
 	import { ui } from '$lib/i18n';
 	import LanguageButton from './LanguageButton.svelte';
+	import ProjectMedia from './ProjectMedia.svelte';
 
 	let { project, copy }: { project: LocalizedProject; copy: (typeof ui)['en'] } = $props();
 </script>
@@ -21,13 +22,14 @@
 		<p class="summary drop-cap">{project.description}</p>
 	</header>
 
-	<figure class="project-image">
-		{#if project.image}
-			<img src={project.image.src} alt={project.image.alt} />
-		{:else}
-			<p>{copy.projectImagePlaceholder}</p>
-		{/if}
-	</figure>
+	{#key `${project.id}:${project.video ?? ''}`}
+		<ProjectMedia
+			image={project.image}
+			video={project.video}
+			label={copy.projectVideo(project.title)}
+			placeholder={copy.projectImagePlaceholder}
+		/>
+	{/key}
 
 	<div class="project-body">
 		<section aria-labelledby="about-project-heading">
@@ -117,35 +119,6 @@
 		margin-top: var(--text-gap);
 		font-size: clamp(1rem, 2vw, 1.25rem);
 		line-height: 1.7;
-		color: var(--color-text-muted);
-	}
-
-	.project-image {
-		margin: 0;
-		border: 1px solid var(--color-border);
-		background: var(--color-surface);
-		box-shadow: var(--shadow-offset);
-	}
-
-	.project-image img,
-	.project-image p {
-		width: 100%;
-		aspect-ratio: 16 / 9;
-	}
-
-	.project-image img {
-		display: block;
-		object-fit: cover;
-	}
-
-	.project-image p {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: var(--space-5);
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		text-align: center;
 		color: var(--color-text-muted);
 	}
 
