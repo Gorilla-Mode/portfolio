@@ -152,22 +152,43 @@ export const projects: Project[] = [
 		id: 'NRL',
 		title: 'NRL Obstacle Reporting',
 		description: {
-			en: '3. Semester project where we as a group developed a system, in partnership with the Norwegian Mapping Auhority and Air-Ambulance, for in-flight reporting of obstacles',
-			nb: '3. Semesterprosjekt hvor vi som gruppe utviklet et system, i samarbeid med Karverket og Norsk Luftambulasne, for rapporering av luftfartshindre under flygning'
+			en: 'Semester project(3.) where we as a group developed a system, in partnership with the Norwegian Mapping Auhority and Air-Ambulance, for in-flight reporting of obstacles',
+			nb: 'Semesterprosjekt(3.) hvor vi som gruppe utviklet et system, i samarbeid med Karverket og Norsk Luftambulasne, for rapporering av luftfartshindre under flygning'
 		},
 		longDescription: {
 			//TODO
 			en: [
-				'Use this space to explain the problem behind the project and why you chose to work on it. Give readers enough context to understand who it was for and what success looked like.',
-				'Describe your approach, the decisions you made, and the part you built yourself. Close with the result or what you learned from the work.'
+				'In collaboration with the Norwegian Mapping Authority and the Norwegian Air Ambulance, we as a group developed a' +
+				' system to make it easy to report aviation obstacles during flight. The system we are developing helped us land' +
+				' an internship at the Norwegian Mapping Authority, where we are working on the same issue now.',
+				'The project was built in C# and ASP.net MVC and runs in a Docker container, it is connected to another container' +
+				' that runs the MariaDB database. For ORM we used Dapper which gives us complete control over SQL queries, we also used' +
+				' "database first" approach.',
+				'A big challenge we had was how to unit test dapper queries? This is easy with EF, but Dapper is raw SQL and cannot' +
+				'be easily mocked. Our solution was to start a SQLite database in memory and run the tests against this. The problem was' +
+				' that the SQL dialect to MariaDB and SQLite is not exactly the same.',
 			],
 			nb: [
-				'Bruk denne plassen til å forklare problemet bak prosjektet og hvorfor du valgte å jobbe med det. Gi leserne nok kontekst til å forstå hvem det var for, og hvordan et godt resultat så ut.',
-				'Beskriv fremgangsmåten din, valgene du tok, og det du bygde selv. Avslutt med resultatet eller det du lærte av arbeidet.'
+				'I sammarbeid med Kartverket og Norsk Luftambulanse utviklet vi som gruppe et system med å gjøre det enkelt å' +
+				'rapportere luftfartshindre under flygning som mål. Systemet vi utvikler var med på å lande oss en praksisplass hos' +
+				'Kartverket, der vi jobber med akkurat samme problemstilling nå.',
+				'Prosjektet er bygget i C# og ASP.net mvc og kjører i en Docker container, den er koblet til en annen container som' +
+				'kjører MariaDB databasen. For ORM brukte vi Dapper som gir oss fullstendig kontroll over SQl-spørringer, vi kjørte også' +
+				'"database first".',
+				'En stor utfordring vi hadde var hvordan unit-teste dapper spørringer? Dette er enkelt med f.eks EF, men' +
+				' Dapper er rå SQL og en kan ikke bruke mocks på samme måte. Løsningen vår var å starte en egen SQLite database i minne og kjøre' +
+				'testene mot denne. Ulepen her var at SQL dialekt til MariaDB og SQLite ikke er helt likt'
 			]
 		},
 		technologies: ['C#', 'MVC', 'mySQL', 'Docker'],
-		github: 'https://github.com/Gorilla-Mode/NRL-Obstacle-Reporting'
+		github: 'https://github.com/Gorilla-Mode/NRL-Obstacle-Reporting',
+		image: {
+			src: '/img/projects/nrl.png',
+				alt: {
+					en: 'NRL',
+					nb: 'NRL'
+				}
+		}
 	},
 	{
 		id: 'SWRPG',
@@ -179,16 +200,34 @@ export const projects: Project[] = [
 		longDescription: {
 			//TODO
 			en: [
-				'Introduce the people or use case behind this project. Explain the need it addressed and the constraints that shaped the work.',
-				'Walk through the most important implementation choices and your contribution. Add a concrete outcome, challenge, or lesson once this is a real project.'
+				'Me and some friends play Star Wars RPG, and we use Tabletop Simulator for this, but Tabletop has a big weakness.' +
+				'Items that characters have are cards, these cards in tabletop use textures in the form of a link. Links can change,' +
+				' and when they do the texture disappears from the card, and it does not support synchronization across card instances.',
+				'Therefore im developing a system that keeps track of items to characters, we have switched to using a grid system' +
+				' opposed to the weight-based system in the rules.',
+				'The program is written in 100% Odin, basically C with a solid standard library and fantastic buildsystem that is very similar the one' +
+				' in Golang. The program uses an "immediate mode" ui and runs on GPU with raylib.',
 			],
 			nb: [
-				'Presenter menneskene eller bruksområdet bak prosjektet. Forklar behovet det skulle dekke, og rammene som formet arbeidet.',
-				'Gå gjennom de viktigste valgene i gjennomføringen og ditt eget bidrag. Legg til et konkret resultat, en utfordring eller en erfaring når dette er et virkelig prosjekt.'
+				'Jeg og noen venner spiller Star Wars RPG, og bruker Tabletop Simulator til dette, men Tabletop har en stor svakhet.' +
+				'gjenstander som karakterer har er kort, disse kortene i tabletop bruker textures i form av en link. Linker kan endres,' +
+				' og dermerd forsvinner texturen fra kortet, og det støtter ikke synkronisering på tvers av instanser.',
+				'Derfor holder jeg på med å utvikle et egent system for å holde styr på gjenstander til karakterer, videre har vi ' +
+				'byttet til å bruke et grid system ovenfor vekt systemet i reglene.',
+				'Programmet er skrevet i 100% Odin, basically C med et solid standard library og fantastisk buildsystem som er veldig likt Golang sitt.' +
+				' Programmet bruker en "immediate mode" ui og kjører på GPU med raylib.'
+
 			]
 		},
 		technologies: ['Odin', 'Raylib'],
-		github: 'https://github.com/Gorilla-Mode/SWRPG-Inventory-System'
+		github: 'https://github.com/Gorilla-Mode/SWRPG-Inventory-System',
+		image: {
+			src: '/img/projects/swis.png',
+			alt: {
+				en: 'SWRPG',
+				nb: 'SWRPG'
+			}
+		}
 	},
 	{
 		id: 'ROC',
@@ -200,12 +239,26 @@ export const projects: Project[] = [
 		longDescription: {
 			//TODO
 			en: [
-				'Explain the question or idea that started this experiment. What did you want to test, make, or understand?',
-				'Share how you explored it, what changed along the way, and what you would do next. Replace this text with the details that make the project distinctive.'
+				'To embark on missions far from Kerbin(Earth in Kerbal Space Program) it is necessary to create satellite networks' +
+				' that guarantee continuous communication with mission control.',
+				' This can be achieved by creating a satellite network' +
+				' around planets and moons, where at least three relays are placed evenly with the same orbit. Both on an equatorial and ' +
+				'polar orbit. For this to be most optimal and time-efficient, multiple relays are carried in the same launch vehicle',
+				'The main challenge is to place the relays evenly with respect to each other from the same launch vehicle. My solution is ROC' +
+				', a TUI program that calculates an elliptical orbit with a given resonance to the target orbit, based on the number of relays' +
+				' to be placed. Then one revolution in the elliptical orbit corresponds to e.g. 10 revolutions in the target orbit, and then by launching a' +
+				' relay when the orbits intersect, until all relays are launched, all relays will be placed with equal spacing'
 			],
 			nb: [
-				'Forklar spørsmålet eller ideen som startet eksperimentet. Hva ville du teste, lage eller forstå?',
-				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
+				'For å kunne legge ut på oppdrag lagt i fra Kerbin(Jorda i Kerbal Space Program) er det nødvendig og lage satellittnettverk' +
+				'som garanterer kontinuerlig kommunikasjon med mission control.',
+				'Dette kan gjøres ved å lage et satellittnettverk rundt planeter og måner, der det går minst tre reler med likt ' +
+				'mellomrom i bane. Både på en ekvator og polarbane. For å gjøre dette mest optimalt og tidsbesparende skyter en opp flere' +
+				' reler på en gang i samme fartøy.',
+				'Utfordingen er å plassere relene med jevnt mellomrom fra samme fartøy. Løsningen min er ROC som kalkulerer en elliptisk' +
+				' bane med en gitt resonans til målbanen, basert på antallet reler som skal plasseres. Da tilsvarer en runde i den elliptiske banen' +
+				' f.eks 10 runder i målbanen, og da med å skyte ut en rele når banene krysser, til en har skutt ut alle, vil alle relene plasseres med likt' +
+				' mellomrom'
 			]
 		},
 		github: 'https://github.com/Gorilla-Mode/ROC',
@@ -228,12 +281,27 @@ export const projects: Project[] = [
 		longDescription: {
 			//TODO
 			en: [
-				'Explain the question or idea that started this experiment. What did you want to test, make, or understand?',
-				'Share how you explored it, what changed along the way, and what you would do next. Replace this text with the details that make the project distinctive.'
+				'Traditional map services use maps where rasterization and styling occurs on the server(raster maps), the disadvantage of this' +
+				' is that PNG or TIFF files are large and use a lot of network to be sent and storage to save. Therefore, vector maps are used ' +
+				'to a greater extent' +
+				' where the raw vector data is sent to the client along with information to the map engine about how this should be displayed.',
+				'GeoFlatpack is a tool that converts GML datasets to flatGeobuf format with GDAL, which is a binary vector format that is much' +
+				' smaller than GML. Further, it loads the FGB file into memory and lets a user define and generate a stylesheet for the map engine,' +
+				' ensuring that the map is displayed correctly. Currently, only maplibre is supported.',
+				'Then both the FGB file and the stylesheet are sent to the map engine and the client renders it. From testing, the reduction in' +
+				' file size is significant. A 500Mb GML file is reduced to about a 110 Mb FGB with a stylesheet under a Mb. This does not take into account' +
+				' the amount of Gb of PNG files that had been generated and stored on a traditional raster service.'
 			],
 			nb: [
-				'Forklar spørsmålet eller ideen som startet eksperimentet. Hva ville du teste, lage eller forstå?',
-				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
+				'Tradisjonelle karttjenester bruker kart der rasterisering og styling skjer på serveren(raster-kart), ulempen med dette' +
+				' er at PNG eller TIFF filer er store og bruker mye nett på å sendes. Derfor brukes vektor kart i større og større grad' +
+				' der den rå vektor dataen sendes til klienten sammen med informasjon til kartmotoren om hvordan dette skal vises.',
+				'GeoFlatpack er et verktøy som konverterer GML datasett til flatGeobuf format med GDAL, som er et binært vektor ' +
+				'format som er mye mindre enn GML. Videre så lastes FGB filen i minne og lar en definere og generere styling til kartmotoren,' +
+				' nå støttes kun maplibre.',
+				'Da sendes både FGB filen og stylesheetet til kartmotoren og lar klienten rendre det. Fra tester reduseres en omtrent 500Mb GML fil' +
+				' ned til 110 Mb FGB med et stylesheet under en Mb. Dette tar ikke høyde for hvor mange Gb med PNG filer som hadde blitt generert' +
+				'og lagret på server med en tradisjonell rasterjeneste'
 			]
 		},
 		technologies: ['Go', 'FlatGeobuf', 'GDAL'],
@@ -257,33 +325,45 @@ export const projects: Project[] = [
 		longDescription: {
 			//TODO
 			en: [
-				'Explain the question or idea that started this experiment. What did you want to test, make, or understand?',
-				'Share how you explored it, what changed along the way, and what you would do next. Replace this text with the details that make the project distinctive.'
+				'Ghostty is the terminal emulator I use, and currently does not support a status bar in the same way as in f.eks TMUX.',
+				'Therefore im developing a custom status bar for Ghostty that runs in a separate window, and gives information about' +
+				' CPU, RAM -usage, etc.'
 			],
 			nb: [
-				'Forklar spørsmålet eller ideen som startet eksperimentet. Hva ville du teste, lage eller forstå?',
-				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
+				'Ghostty er terminal emulatoren jeg bruker, og nå støttes det ikke en status-bar på samme måte som i f.eks TMUX.',
+				'Derfor holder jeg på og utvikle en egen status-bar til Ghostty som kjører i ett eget vindu, og gir informasjon om' +
+				' CPU, RAM -bruk, osv.'
 			]
 		},
 		technologies: ['C'],
-		github: 'https://github.com/Gorilla-Mode/GST'
+		github: 'https://github.com/Gorilla-Mode/GST',
+		image: {
+			src: '/img/projects/gst2.png',
+			alt: {
+				en: 'GhosttyStatus',
+				nb: 'GhosttyStatus'
+			}
+		}
 	},
 	{
 		id: '218',
 		title: 'ShelterLog',
 		description: {
-			en: '4. Semester project where we as a group developed a system to route to shelters and supplies in the event of an emergency',
-			nb: 'Et 4. semester prosjekt hvor vi som en gruppe utviklet et system for å rute til tilfluktsrom og forsyninger i en nødsituasjon'
+			en: 'Semester project(4.) where we as a group developed a system to route to shelters and supplies in the event of an emergency',
+			nb: 'Et semester prosjekt(4.) hvor vi som en gruppe utviklet et system for å rute til tilfluktsrom og forsyninger i en nødsituasjon'
 		},
 		longDescription: {
 			//TODO
 			en: [
-				'Explain the question or idea that started this experiment. What did you want to test, make, or understand?',
-				'Share how you explored it, what changed along the way, and what you would do next. Replace this text with the details that make the project distinctive.'
+				'We developed a system to find the fastest route to the nearest shelter in an emergency situation, where the route' +
+					' avoided active emergency areas such as fires, flooding, etc. Further, the program also supported finding the route to' +
+					' the nearest supplies from a selected shelter, such as water and medicine.',
+				'This was developed as a webapp with a Python backend and a Postgres database with PostGIS.'
 			],
 			nb: [
-				'Forklar spørsmålet eller ideen som startet eksperimentet. Hva ville du teste, lage eller forstå?',
-				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
+				'Vi utviklet et system for å finne raskeste vei til nærmeste tilfuktsrom i en krisesituasjon, der rutingen unngikk kriseområder.' +
+				' Som flommer, brann, osv. Videre støttet programmet også å finne vei fra tilfluktsrom til ressurser som manglet, f.eks vann og medisin.',
+				'Dette ble utviklet som en webapplikasjon med en Python backend og en Postgres database med PostGIS.'
 			]
 		},
 		technologies: ['Python', 'TypeScript', 'Postgres', 'PostGIS'],
