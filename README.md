@@ -1,9 +1,10 @@
+# [Live site](https://portfolio.tobias-olsen02.workers.dev/)
+
+[View the live deployment here ^^^^](https://portfolio.tobias-olsen02.workers.dev/)
+
 # My portfolio
 
 My dev portfolio, yeah, that's right.
-
-## Live site
-Live site of the portfolie is [here.](https://portfolio.tobias-olsen02.workers.dev/)
 
 ## Stack
 
@@ -12,23 +13,23 @@ Live site of the portfolie is [here.](https://portfolio.tobias-olsen02.workers.d
 
 ## Structure
 
-Edit portfolio content in [`src/lib/content.ts`](src/lib/content.ts).Design conventions are in [`DESIGN.md`](DESIGN.md).
+Edit portfolio content in [`src/lib/content.ts`](src/lib/content.ts). Design conventions are in [`DESIGN.md`](DESIGN.md).
 
 ## Local commands
 
-```sh
+```zsh
 npm install
 ```
 
 _Install dependencies._
 
-```sh
+```zsh
 npm run dev
 ```
 
 _Start the Vite development server._
 
-```sh
+```zsh
 npm run build && wrangler dev
 ```
 
