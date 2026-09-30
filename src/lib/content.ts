@@ -40,19 +40,19 @@ export const profile: Profile = {
 	name: 'Tobias Olsen Nodland',
 	role: {
 		en: 'Backend Developer',
-		nb: 'Backend utvikler'
+		nb: 'Backend utvikling'
 	},
 	bio: {
-		en: 'A few words about you, what you do, and what you care about. Keep it short, make it personal, and let your work tell the rest of the story.',
-		nb: 'Noen ord om deg, hva du gjør, og hva som er viktig for deg. Hold det kort og personlig, og la arbeidet ditt fortelle resten av historien.'
+		en: 'I am Tobias, 24 years old from Tvedestrand and I am very interested in technology and software development. I mainly focus on backend, UX and architecture',
+		nb: 'Jeg er Tobias, 24 år fra Tvedestrand og er jeg veldig interessert i teknologi og programvareutvikling. I hovedsak holder jeg på med backend, UX og arkitektur'
 	},
 	github: 'https://github.com/Gorilla-Mode',
 	linkedin: 'https://www.linkedin.com/in/tobias-olsen-nodland-44b03a3a0/',
 	image: {
 		src: '/img/other/me.jpg',
 		alt: {
-			en: 'Your image description in English',
-			nb: 'Din bildebeskrivelse i norsk'
+			en: 'Me',
+			nb: 'Meg'
 		},
 		framing: {
 			x: 50,
@@ -286,7 +286,7 @@ export const projects: Project[] = [
 				'Fortell hvordan du utforsket ideen, hva som endret seg underveis, og hva du ville gjort videre. Bytt ut denne teksten med det som gjør prosjektet særegent.'
 			]
 		},
-		technologies: ['Python', 'TypeScript', 'Postres', 'PostGIS'],
+		technologies: ['Python', 'TypeScript', 'Postgres', 'PostGIS'],
 		github: 'https://github.com/sivert-svanes/IS-218-Prosjekt'
 	}
 ];
@@ -304,8 +304,12 @@ export const interests: Interest[] = [
 			nb: 'Fiske'
 		},
 		description: {
-			en: 'Use this space to share what fishing means to you, where you enjoy it, or a memorable experience on the water.',
-			nb: 'Bruk denne plassen til å fortelle hva fiske betyr for deg, hvor du liker å fiske, eller om en minneverdig opplevelse på vannet.'
+			en: 'Fishing is one of my favorite activities and hobby when I am not in front of the computer. I mainly fish stillwater, ' +
+				   'but whenever im out at sea i bring my rod. I fish mostly for trout, but i have a project of catching a big fish of' +
+				   'all the freshwater species in Norway. Currenlty im fishing for a big Pike and Perch',
+			nb: 'Fiske er en av mine favoritt aktiviterer og hobby når jeg ikke sitter foran datamaskinen. Jeg fisker så si bare i ferksvann på stang, ' +
+				  'men hvis jeg er på sjøen så blir stanga med. Jeg for det meste etter aure, men har et lite prosjekt med å fange' +
+				  ' en stor fisk av alle ferksvannsartene i Norge. Så nå er jeg på jakt etter en stor tryte og gjedde'
 		},
 		image: {
 			src: '/img/interests/river_monster_1.jpg',
@@ -343,8 +347,12 @@ export const interests: Interest[] = [
 			nb: 'Matlaging'
 		},
 		description: {
-			en: 'Use this space to describe what you like to cook, the traditions you return to, or how you enjoy bringing people together around food.',
-			nb: 'Bruk denne plassen til å beskrive hva du liker å lage, tradisjonene du vender tilbake til, eller hvordan du samler mennesker rundt mat.'
+			en: 'I also really enjoy cooking, not fish ironically. For the most part im cooking Italian and French cuisine. From Italy' +
+				  ' Bolognese and Carbonara are clear favorites, obviously made with the correct cuts, cheese and wine. From France ' +
+				  'I mostly cook meat dishes and sauces, entrecote with sauce financiere(madeira sauce) is hard to beat',
+			nb: 'Jeg er også veldig glad i å lage mat, ironisk nok ikke fisk. For det meste så lager jeg Italienske og Franske retter' +
+				  ' fra Italia eller Bolognese og Carbonara klare favoritter, og de må da selvfølgelig lages med riktig kjøtt, ost, vin, osv.' +
+				  ' Fra Frankrike lager jeg mest kjøttretter og sauser, entrecote med financiere saus(madeira saus) er det ikke mye som slår '
 		},
 		image: {
 			src: '/img/interests/Cooking_2.jpg',
@@ -382,8 +390,11 @@ export const interests: Interest[] = [
 			nb: 'Fotografi'
 		},
 		description: {
-			en: 'Replace this placeholder with another interest and a short, personal note about why it matters to you.',
-			nb: 'Bytt ut denne plassholderen med en annen interesse og en kort, personlig tekst om hvorfor den betyr noe for deg.'
+			en: 'Photography is also a big interest of mine. For the most part i take pictures of nature, birds and cars, but' +
+				  'if i see a good picture i take it. I take my pictures on an analog Nikon F3, i also use a DSLR but i dont have many good lenses for it',
+			nb: 'Fotografi er også en stor interesse for meg. Jeg tar for det meste bilder av natur, fugl og biler, men hvis ' +
+				  'jeg ser et fint motiv så blir det et bilde. Bildene tar jeg med en analog Nikon F3, jeg bruker også' +
+				  'en digital speilrefleks, men har ikke så mange gode linser til den.'
 		},
 		image: {
 			src: '/img/interests/photography_2.jpg',
