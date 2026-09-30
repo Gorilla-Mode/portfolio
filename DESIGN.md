@@ -113,6 +113,15 @@ Example with exact dimensions:
   URLs add links on project detail pages. Optional profile, project, selector, and interest detail
   images use a source and alt text in both languages, replacing their visible placeholders. Omit
   these fields until real destinations and assets exist.
+- **Project video:** Set an optional `video` URL beside a project's `image` in `src/lib/content.ts`,
+  for example `video: 'https://example.com/project-demo.mp4'`. Use a direct browser-playable MP4 or
+  WebM file, not a YouTube/Vimeo page. Videos are silent project demos and replace the detail image,
+  filling the available width at their natural aspect ratio without cropping. The optional image
+  supplies the poster and fallback if the video fails; without either, the existing placeholder is
+  shown. Playback starts muted, loops, and stays inline, with native controls for pausing or manually
+  starting playback when autoplay is blocked. Autoplay waits until reduced-motion preferences have
+  been checked; reduced motion disables automatic playback and pauses an already playing video when
+  enabled. Manual playback remains available. No project video is configured until a real URL exists.
 - **Language:** The button shows the destination language: `NOR` for Norsk (Bokmål) on English pages,
   `ENG` for English on Norwegian pages. The first response uses a valid `portfolio_lang` cookie or
   the browser language preference, falling back to English. Switching updates page copy, metadata,
